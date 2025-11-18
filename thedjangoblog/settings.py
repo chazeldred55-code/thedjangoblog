@@ -12,8 +12,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
 SECRET_KEY = config("SECRET_KEY", default="unsafe-secret-key")
-DEBUG = config("DEBUG", default="True", cast=bool)
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com"]
+
+# IMPORTANT: Default must be False for production
+DEBUG = config("DEBUG", default=False, cast=bool)
+
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "thedjangoblog.herokuapp.com",   # Heroku app
+]
 
 # Application definition
 INSTALLED_APPS = [
@@ -23,12 +30,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "blog",  # your app
+    "blog",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # Serve static files
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -42,7 +49,7 @@ ROOT_URLCONF = "thedjangoblog.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],  # Add templates folder if needed
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -57,16 +64,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "thedjangoblog.wsgi.application"
 
-# Database
+# DATABASE (Heroku Postgres)
 DATABASES = {
     "default": dj_database_url.config(
         default=os.environ.get("DATABASE_URL"),
-        conn_max_age=600
+        conn_max_age=600,
+        ssl_require=True
     )
 }
-CSRF_Trusted_Origins = [
-       "https://*.codeinstitute-ide.net/",
-    "https://*.herokuapp.com"
+
+# CSRF Trusted Origins (NO trailing slash)
+CSRF_TRUSTED_ORIGINS = [
+    "https://thedjangoblog.herokuapp.com",
+    "https://*.herokuapp.com",
 ]
 
 # Password validation

@@ -1,7 +1,7 @@
 # thedjangoblog/urls.py
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from blog import views as blog_views  # Import views from your blog app
 
 urlpatterns = [
