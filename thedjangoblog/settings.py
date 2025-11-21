@@ -3,7 +3,7 @@ from pathlib import Path
 from decouple import config
 import dj_database_url
 
-# Load local env.py if it exists
+# Load local env.py if it exists (optional for local development)
 if os.path.isfile("env.py"):
     import env
 
@@ -13,14 +13,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 SECRET_KEY = config("SECRET_KEY", default="unsafe-secret-key")
 
-# IMPORTANT: Default must be False for production
+# Debug should be False in production
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "thedjangoblog.herokuapp.com",   # Heroku app
-]
+# Allowed hosts for production
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS", 
+    default="thedjangoblog.herokuapp.com"
+).split(",")
 
 # Application definition
 INSTALLED_APPS = [
@@ -73,11 +73,11 @@ DATABASES = {
     )
 }
 
-# CSRF Trusted Origins (NO trailing slash)
-CSRF_TRUSTED_ORIGINS = [
-    "https://thedjangoblog.herokuapp.com",
-    "https://*.herokuapp.com",
-]
+# CSRF Trusted Origins
+CSRF_TRUSTED_ORIGINS = config(
+    "CSRF_TRUSTED_ORIGINS",
+    default="https://thedjangoblog.herokuapp.com"
+).split(",")
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -93,7 +93,7 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-# Static files
+# Static files (WhiteNoise)
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
