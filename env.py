@@ -4,7 +4,7 @@ import os
 os.environ.setdefault('SECRET_KEY', 'your-local-secret-key')
 
 # Debug mode (True for local dev)
-os.environ.setdefault('DEBUG', 'True')
+os.environ.setdefault('DEBUG', 'False')
 
 # Optional: local PostgreSQL database URL
 os.environ.setdefault(

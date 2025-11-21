@@ -1,2 +1,2 @@
-web: gunicorn thedjangoblog.wsgi:application
+web: gunicorn thedjangoblog.wsgi:application --log-file -
 
