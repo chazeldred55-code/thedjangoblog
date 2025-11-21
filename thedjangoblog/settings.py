@@ -3,7 +3,7 @@ from pathlib import Path
 from decouple import config
 import dj_database_url
 
-# Load local env.py if it exists (optional for local development)
+# Load local env.py if it exists (for local development)
 if os.path.isfile("env.py"):
     import env
 
@@ -13,14 +13,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 SECRET_KEY = config("SECRET_KEY", default="unsafe-secret-key")
 
-# Debug should be False in production
+# IMPORTANT: Must be False in production
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-# Allowed hosts for production
-ALLOWED_HOSTS = config(
-    "ALLOWED_HOSTS", 
-    default="thedjangoblog.herokuapp.com"
-).split(",")
+# ALLOWED HOSTS
+ALLOWED_HOSTS = [
+    "thedjangoblog.herokuapp.com",  # Your Heroku app
+    ".herokuapp.com",               # Allow any Heroku subdomain
+    "localhost",
+    "127.0.0.1",
+]
+
+# CSRF Trusted Origins
+CSRF_TRUSTED_ORIGINS = [
+    "https://thedjangoblog.herokuapp.com",
+    "https://*.herokuapp.com",
+]
 
 # Application definition
 INSTALLED_APPS = [
@@ -64,7 +72,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "thedjangoblog.wsgi.application"
 
-# DATABASE (Heroku Postgres)
+# Database (Heroku Postgres)
 DATABASES = {
     "default": dj_database_url.config(
         default=os.environ.get("DATABASE_URL"),
@@ -72,12 +80,6 @@ DATABASES = {
         ssl_require=True
     )
 }
-
-# CSRF Trusted Origins
-CSRF_TRUSTED_ORIGINS = config(
-    "CSRF_TRUSTED_ORIGINS",
-    default="https://thedjangoblog.herokuapp.com"
-).split(",")
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -93,7 +95,7 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-# Static files (WhiteNoise)
+# Static files
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
