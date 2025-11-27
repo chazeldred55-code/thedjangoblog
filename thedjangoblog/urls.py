@@ -1,10 +1,7 @@
-# thedjangoblog/urls.py
-
 from django.contrib import admin
-from django.urls import path, include
-from blog import views as blog_views  # Import views from your blog app
+from django.urls import path, include  # include allows app-level URL routing
 
 urlpatterns = [
-    path('admin/', admin.site.urls),    # Django admin
-    path('', blog_views.index, name='index'),  # Home page: calls blog/views.py index()
+    path('admin/', admin.site.urls),   # Django admin
+    path('', include('blog.urls')),    # All blog-related routes handled in blog/urls.py
 ]

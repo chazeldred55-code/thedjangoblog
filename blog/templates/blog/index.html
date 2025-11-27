@@ -1,0 +1,12 @@
+<h1>Welcome to My Blog</h1>
+<h2>Latest Posts</h2>
+<ul>
+  {% for post in latest_posts %}
+    <li>
+      <a href="#">{{ post.title }}</a> - {{ post.created_on|date:"M d, Y" }}
+    </li>
+  {% empty %}
+    <li>No posts yet.</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'blog' %}">See all posts</a>
