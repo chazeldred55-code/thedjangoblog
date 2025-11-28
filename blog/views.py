@@ -2,13 +2,12 @@ from django.shortcuts import render
 from django.views import generic
 from .models import Post
 
-# Homepage view
+# Homepage view → uses index.html
 def index(request):
-    # Latest 3 published posts
     latest_posts = Post.objects.filter(status=1).order_by('-created_on')[:3]
     return render(request, 'blog/index.html', {'latest_posts': latest_posts})
 
-# Blog list page (all published posts)
+# Blog list view → uses blog.html
 class BlogListView(generic.ListView):
     model = Post
     template_name = 'blog/blog.html'
