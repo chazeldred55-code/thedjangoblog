@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <!-- Post Card -->
+            <div class="card mb-4">
+                <div class="card-body">
+
+                    <!-- Author Badge -->
+                    <div class="image-container mb-3">
+                        <div class="image-flash">
+                            <p class="author">Author: {{ object.author }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Post Title -->
+                    <h1 class="card-title">{{ object.title }}</h1>
+
+                    <!-- Post Metadata -->
+                    <p class="text-muted">
+                        Published on {{ object.created_on|date:"F j, Y" }}
+                    </p>
+
+                    <hr />
+
+                    <!-- Post Content -->
+                    <div class="post-content">
+                        {{ object.content|safe }}
+                    </div>
+
+                    <hr />
+
+                    <!-- Optional Back Link -->
+                    <a href="{% url 'blog_list' %}" class="btn btn-signup mt-3">← Back to Blog</a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
