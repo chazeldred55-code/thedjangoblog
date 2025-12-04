@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Post
 
@@ -7,9 +7,10 @@ class HomePageView(ListView):
     model = Post
     template_name = 'blog/index.html'
     context_object_name = 'post_list'  # matches index.html loop
-    paginate_by = 6
+    paginate_by = 6  # Number of posts per page
 
     def get_queryset(self):
+        # Only published posts, newest first
         return Post.objects.filter(status=1).order_by('-created_on')
 
 
@@ -21,6 +22,7 @@ class BlogListView(ListView):
     paginate_by = 6
 
     def get_queryset(self):
+        # Only published posts, newest first
         return Post.objects.filter(status=1).order_by('-created_on')
 
 
