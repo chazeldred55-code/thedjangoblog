@@ -3,7 +3,7 @@ from pathlib import Path
 from decouple import config
 import dj_database_url
 
-# Load local env.py if it exists (for local development)
+# Load env.py if present (local development)
 if os.path.isfile("env.py"):
     import env
 
@@ -11,15 +11,18 @@ if os.path.isfile("env.py"):
 # Paths
 # ------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
-STATIC_DIR = os.path.join(BASE_DIR, "static")
-MEDIA_DIR = os.path.join(BASE_DIR, "media")  # optional for uploads
+
+TEMPLATES_DIR = BASE_DIR / "templates"
+STATIC_DIR = BASE_DIR / "static"
+MEDIA_DIR = BASE_DIR / "media"
 
 # ------------------------
 # Security
 # ------------------------
 SECRET_KEY = config("SECRET_KEY", default="unsafe-secret-key")
-DEBUG = config("DEBUG", default=True, cast=bool)  # True locally, False on Heroku
+
+# DEBUG = False on Heroku, True locally
+DEBUG = config("DEBUG", default=True, cast=bool)
 
 ALLOWED_HOSTS = [
     "thedjangoblog.herokuapp.com",
@@ -28,6 +31,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
 ]
 
+# REQUIRED for Heroku
 CSRF_TRUSTED_ORIGINS = [
     "https://thedjangoblog.herokuapp.com",
 ]
@@ -42,7 +46,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # Third-party
     "django_summernote",
+
+    # Local app
     "blog",
 ]
 
@@ -51,7 +59,10 @@ INSTALLED_APPS = [
 # ------------------------
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+
+    # MUST be directly after SecurityMiddleware
     "whitenoise.middleware.WhiteNoiseMiddleware",
+
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -61,7 +72,7 @@ MIDDLEWARE = [
 ]
 
 # ------------------------
-# URL configuration
+# URL Config
 # ------------------------
 ROOT_URLCONF = "thedjangoblog.urls"
 
@@ -87,13 +98,13 @@ TEMPLATES = [
 WSGI_APPLICATION = "thedjangoblog.wsgi.application"
 
 # ------------------------
-# Database (Heroku Postgres)
+# Database
 # ------------------------
 DATABASES = {
     "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),
+        default=config("DATABASE_URL", default="sqlite:///db.sqlite3"),
         conn_max_age=600,
-        ssl_require=True
+        ssl_require=not DEBUG,  # ssl only on heroku
     )
 }
 
@@ -119,10 +130,11 @@ USE_TZ = True
 # Static files
 # ------------------------
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [STATIC_DIR]           # Local dev static folder
-STATIC_ROOT = BASE_DIR / "staticfiles"    # collectstatic target for Heroku
 
-# Whitenoise for static files in production
+STATICFILES_DIRS = [STATIC_DIR] if DEBUG else []
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
@@ -133,12 +145,25 @@ STORAGES = {
 }
 
 # ------------------------
-# Media files (optional)
+# Media files
 # ------------------------
 MEDIA_URL = "/media/"
 MEDIA_ROOT = MEDIA_DIR
 
 # ------------------------
-# Default primary key field type
+# Summernote (optional defaults)
+# ------------------------
+X_FRAME_OPTIONS = "SAMEORIGIN"
+
+SUMMERNOTE_CONFIG = {
+    "iframe": True,
+    "summernote": {
+        "width": "100%",
+        "height": "300",
+    },
+}
+
+# ------------------------
+# Default Auto Field
 # ------------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

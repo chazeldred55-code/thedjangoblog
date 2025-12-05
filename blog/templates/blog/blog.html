@@ -1,9 +1,67 @@
-<h1>All Posts</h1>
-{% for post in posts %}
-    <h2>{{ post.title }}</h2>
-    <p>{{ post.excerpt }}</p>
-    <p>Author: {{ post.author }}</p>
-    <p>Published on: {{ post.created_on|date:"M d, Y" }}</p>
-{% empty %}
-    <p>No posts available.</p>
-{% endfor %}
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h1 class="mb-4 text-center">All Posts</h1>
+
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+
+                <div class="card-body">
+                    <!-- Author -->
+                    <div class="image-container mb-2">
+                        <div class="image-flash">
+                            <p class="author">Author: {{ post.author }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Title + excerpt link -->
+                    <a href="{% url 'post_detail' post.slug %}" class="post-link">
+                        <h2 class="card-title">{{ post.title }}</h2>
+                        <p class="card-text">{{ post.excerpt }}</p>
+                    </a>
+
+                    <hr>
+
+                    <!-- Metadata -->
+                    <p class="card-text text-muted h6">
+                        Published on {{ post.created_on|date:"F j, Y" }}
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No posts available.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center mt-4">
+
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Prev</a>
+            </li>
+            {% endif %}
+
+            <li class="page-item disabled">
+                <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            </li>
+
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a href="?page={{ page_obj.next_page_number }}" class="page-link">Next &raquo;</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
+</div>
+{% endblock %}

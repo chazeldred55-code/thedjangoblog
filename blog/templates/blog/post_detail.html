@@ -12,23 +12,23 @@
                     <!-- Author Badge -->
                     <div class="image-container mb-3">
                         <div class="image-flash">
-                            <p class="author">Author: {{ object.author }}</p>
+                            <p class="author">Author: {{ post.author }}</p>
                         </div>
                     </div>
 
                     <!-- Post Title -->
-                    <h1 class="card-title">{{ object.title }}</h1>
+                    <h1 class="card-title">{{ post.title }}</h1>
 
                     <!-- Post Metadata -->
                     <p class="text-muted">
-                        Published on {{ object.created_on|date:"F j, Y" }}
+                        Published on {{ post.created_on|date:"F j, Y" }}
                     </p>
 
                     <hr />
 
                     <!-- Post Content -->
                     <div class="post-content">
-                        {{ object.content|safe }}
+                        {{ post.content|safe }}
                     </div>
 
                     <hr />

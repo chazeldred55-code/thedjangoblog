@@ -1,7 +1,11 @@
+/* -----------------------------
+   Image container & author badge
+----------------------------- */
 .image-container {
     position: relative;
     overflow: hidden;
     border-radius: 8px;
+    transition: transform 0.3s ease;
 }
 
 .image-container img.scale {
@@ -9,8 +13,15 @@
     height: 200px;
     object-fit: cover;
     display: block;
+    transition: transform 0.3s ease;
 }
 
+/* Zoom effect on hover */
+.image-container:hover img.scale {
+    transform: scale(1.05);
+}
+
+/* Author flash badge */
 .image-flash {
     position: absolute;
     bottom: 5px;
@@ -19,5 +30,82 @@
     color: white;
     padding: 3px 8px;
     font-size: 0.8rem;
+    font-weight: bold;
     text-transform: uppercase;
+    border-top-right-radius: 8px;
+}
+
+/* -----------------------------
+   Post card links
+----------------------------- */
+.post-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-link:hover h2,
+.post-link:hover p {
+    color: #188181; /* matches your brand color */
+}
+
+/* -----------------------------
+   Card body & spacing
+----------------------------- */
+.card h2.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.card p.card-text {
+    font-size: 0.95rem;
+}
+
+/* -----------------------------
+   Buttons
+----------------------------- */
+.btn-signup {
+    background-color: #188181;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-signup:hover {
+    background-color: #0f6161;
+    color: white;
+}
+
+/* -----------------------------
+   Main background & footer
+----------------------------- */
+.main-bg {
+    background-color: #f5f5f5;
+    min-height: 100vh;
+}
+
+.dark-bg {
+    background-color: #111;
+}
+
+.footer p {
+    margin: 0;
+}
+
+/* -----------------------------
+   Responsive adjustments
+----------------------------- */
+@media (max-width: 768px) {
+    .image-container img.scale {
+        height: 150px;
+    }
+
+    .card h2.card-title {
+        font-size: 1.1rem;
+    }
+
+    .card p.card-text {
+        font-size: 0.9rem;
+    }
 }

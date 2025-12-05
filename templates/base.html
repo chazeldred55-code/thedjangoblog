@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 {% url 'home' as home_url %}
+{% url 'blog_list' as blog_url %}
 <html lang="en" class="h-100">
 
 <head>
@@ -19,7 +20,6 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
           crossorigin="anonymous">
 
     <!-- Custom CSS -->
@@ -29,7 +29,7 @@
 <body class="d-flex flex-column h-100 main-bg">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white" aria-label="Main Navigation">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm" aria-label="Main Navigation">
         <div class="container-fluid">
 
             <!-- Brand -->
@@ -48,16 +48,23 @@
             <!-- Navbar Links -->
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
 
-                        <!-- Active link based on URL -->
+                    <!-- HOME -->
+                    <li class="nav-item">
                         <a class="nav-link {% if request.path == home_url %}active{% endif %}"
-                           aria-current="page"
                            href="{% url 'home' %}">
                            Home
                         </a>
-
                     </li>
+
+                    <!-- BLOG LINK -->
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path|slice:":6" == '/blog/' %}active{% endif %}"
+                           href="{% url 'blog_list' %}">
+                           Blog
+                        </a>
+                    </li>
+
                 </ul>
 
                 <span class="navbar-text text-muted">
@@ -92,9 +99,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-            crossorigin="anonymous">
-    </script>
+            crossorigin="anonymous"></script>
 
 </body>
 </html>

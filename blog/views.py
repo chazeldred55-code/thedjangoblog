@@ -6,15 +6,14 @@ from .models import Post
 class HomePageView(ListView):
     model = Post
     template_name = 'blog/index.html'
-    context_object_name = 'post_list'  # matches index.html loop
-    paginate_by = 6  # Number of posts per page
+    context_object_name = 'post_list'
+    paginate_by = 6
 
     def get_queryset(self):
-        # Only published posts, newest first
         return Post.objects.filter(status=1).order_by('-created_on')
 
 
-# Blog list view → optional, different template
+# Blog list view → optional list page
 class BlogListView(ListView):
     model = Post
     template_name = 'blog/blog.html'
@@ -22,12 +21,13 @@ class BlogListView(ListView):
     paginate_by = 6
 
     def get_queryset(self):
-        # Only published posts, newest first
         return Post.objects.filter(status=1).order_by('-created_on')
 
 
-# Post detail view → uses post_detail.html
+# Post detail view → slug-based
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
     context_object_name = 'post'
+    slug_field = 'slug'        # tells Django to use the slug field
+    slug_url_kwarg = 'slug'    # matches the <slug:slug> URL
