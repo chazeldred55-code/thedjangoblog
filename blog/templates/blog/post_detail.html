@@ -9,11 +9,14 @@
             <div class="card mb-4">
                 <div class="card-body">
 
-                    <!-- Author Badge -->
+                    <!-- Default Image -->
                     <div class="image-container mb-3">
-                        <div class="image-flash">
-                            <p class="author">Author: {{ post.author }}</p>
-                        </div>
+                        <img src="{% static 'images/default.jpg' %}" class="img-fluid" alt="{{ post.title }}">
+                    </div>
+
+                    <!-- Author Badge -->
+                    <div class="image-flash mb-3">
+                        <p class="author">Author: {{ post.author }}</p>
                     </div>
 
                     <!-- Post Title -->
@@ -33,7 +36,7 @@
 
                     <hr />
 
-                    <!-- Optional Back Link -->
+                    <!-- Back to Blog Link -->
                     <a href="{% url 'blog_list' %}" class="btn btn-signup mt-3">← Back to Blog</a>
 
                 </div>
