@@ -1,26 +1,37 @@
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView
 from .models import Post
+
+
+class BlogListView(ListView):
+    """
+    Displays a list of all published blog posts on the home page.
+    """
+    model = Post
+    template_name = "blog/index.html"        # HTML template to render
+    context_object_name = "posts"            # variable name in template
+
+    def get_queryset(self):
+        # Only return published posts (status=1)
+        return Post.objects.filter(status=1).order_by("-created_on")
+
 
 def post_detail(request, slug):
     """
-    Display a single published Post based on its slug.
-    Demonstrates passing context to the template.
+    Display a single blog post based on its slug.
+    Only published posts (status=1) are accessible.
     """
-    # Only get published posts
+
+    # Filter only published posts
     queryset = Post.objects.filter(status=1)
 
-    # Retrieve the post with matching slug or return 404
+    # Fetch post or return 404 if not found
     post = get_object_or_404(queryset, slug=slug)
 
-    # Context dictionary – passing data to template
+    # Data passed into template
     context = {
-        "post": post,       # main post object
-        "coder": "Your Name"  # example additional context
+        "post": post,
+        "coder": "Your Name",   # example extra context
     }
 
-    # Render template with context
-    return render(
-        request,
-        "blog/post_detail.html",
-        context
-    )
+    return render(request, "blog/post_detail.html", context)
