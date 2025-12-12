@@ -1,16 +1,16 @@
 from django.contrib import admin
-from django.urls import path, include  # include allows app-level URL routing
+from django.urls import path, include
 
 urlpatterns = [
-    # About page first
+
+    # Local apps (alphabetical)
     path("about/", include("about.urls"), name="about-urls"),
+    path("", include("blog.urls"), name="blog-urls"),
+
+    # Third-party apps
+    path("accounts/", include("allauth.urls")),
+    path("summernote/", include("django_summernote.urls")),
 
     # Django admin
     path("admin/", admin.site.urls),
-
-    # Summernote editor
-    path("summernote/", include("django_summernote.urls")),
-
-    # All blog-related routes handled in blog/urls.py
-    path("", include("blog.urls"), name="blog-urls"),
 ]

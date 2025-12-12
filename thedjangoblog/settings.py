@@ -40,36 +40,51 @@ CSRF_TRUSTED_ORIGINS = [
 # Installed apps
 # ------------------------
 INSTALLED_APPS = [
+
+    # Django default apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
 
-    # Third-party
+    # Third-party apps
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
     "django_summernote",
 
-    # Local app
-    "blog",
+    # Local apps
     "about",
+    "blog",
 ]
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # ------------------------
 # Middleware
 # ------------------------
 MIDDLEWARE = [
+    # Security
     "django.middleware.security.SecurityMiddleware",
 
-    # MUST be directly after SecurityMiddleware
+    # Static files (must come immediately after SecurityMiddleware)
     "whitenoise.middleware.WhiteNoiseMiddleware",
 
+    # Django core middleware
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+
+    # Third-party middleware
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 # ------------------------
@@ -118,6 +133,8 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # ------------------------
 # Internationalization
