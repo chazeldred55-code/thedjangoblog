@@ -1,8 +1,21 @@
 from django.contrib import admin
-from .models import About
 from django_summernote.admin import SummernoteModelAdmin
+from .models import About, CollaborateRequest
+
 
 @admin.register(About)
 class AboutAdmin(SummernoteModelAdmin):
-    # Enable Summernote rich-text editor for the 'content' field
+    """
+    Admin configuration for the About model.
+    Enables Summernote rich-text editor for content.
+    """
     summernote_fields = ('content',)
+
+
+@admin.register(CollaborateRequest)
+class CollaborateRequestAdmin(admin.ModelAdmin):
+    """
+    Admin configuration for CollaborateRequest model.
+    Displays key fields in the admin list view.
+    """
+    list_display = ('message', 'read')
