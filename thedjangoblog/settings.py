@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'cloudinary_storage',
     "django.contrib.sites",
 
     # Third-party apps
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "django_summernote",
+    'cloudinary',
 
     # Local apps
     "about",
