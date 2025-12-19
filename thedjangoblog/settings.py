@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import sys
 from decouple import config
 import dj_database_url
 
@@ -132,6 +133,9 @@ DATABASES = {
     )
 }
 
+if 'test' in sys.argv:
+    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
+    
 # ------------------------
 # Password validation
 # ------------------------
