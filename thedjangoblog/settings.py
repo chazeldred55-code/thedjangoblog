@@ -1,12 +1,11 @@
 import os
 from pathlib import Path
-import sys
 from decouple import config
 import dj_database_url
 
-# Load env.py if present (local development)
+# Load env.py if present
 if os.path.isfile("env.py"):
-    import env
+    import env  # noqa
 
 # ------------------------
 # Paths
@@ -21,8 +20,6 @@ MEDIA_DIR = BASE_DIR / "media"
 # Security
 # ------------------------
 SECRET_KEY = config("SECRET_KEY", default="unsafe-secret-key")
-
-# DEBUG = False on Heroku, True locally
 DEBUG = config("DEBUG", default=True, cast=bool)
 
 ALLOWED_HOSTS = [
@@ -32,59 +29,54 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
 ]
 
-# REQUIRED for Heroku
 CSRF_TRUSTED_ORIGINS = [
     "https://thedjangoblog.herokuapp.com",
 ]
 
 # ------------------------
-# Installed apps
+# Applications
 # ------------------------
 INSTALLED_APPS = [
-
-    # Django default apps
+    # Django
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'cloudinary_storage',
     "django.contrib.sites",
 
-    # Third-party apps
+    # Third-party
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "django_summernote",
-    'cloudinary',
+    "crispy_forms",
+    "crispy_bootstrap5",
+    "cloudinary",
+    "cloudinary_storage",
 
-    # Local apps
+    # Local
     "about",
     "blog",
-
-    'crispy_forms',
-    'crispy_bootstrap5',
 ]
 
 SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
 # ------------------------
 # Middleware
 # ------------------------
 MIDDLEWARE = [
-    # Security
     "django.middleware.security.SecurityMiddleware",
-
-    # Static files (must come immediately after SecurityMiddleware)
     "whitenoise.middleware.WhiteNoiseMiddleware",
 
-    # Django core middleware
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -92,14 +84,14 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 
-    # Third-party middleware
     "allauth.account.middleware.AccountMiddleware",
 ]
 
 # ------------------------
-# URL Config
+# URLs / WSGI
 # ------------------------
 ROOT_URLCONF = "thedjangoblog.urls"
+WSGI_APPLICATION = "thedjangoblog.wsgi.application"
 
 # ------------------------
 # Templates
@@ -120,22 +112,29 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "thedjangoblog.wsgi.application"
-
 # ------------------------
 # Database
 # ------------------------
-DATABASES = {
-    "default": dj_database_url.config(
-        default=config("DATABASE_URL", default="sqlite:///db.sqlite3"),
-        conn_max_age=600,
-        ssl_require=not DEBUG,  # ssl only on heroku
-    )
-}
+DATABASE_URL = config("DATABASE_URL", default=None)
 
-if 'test' in sys.argv:
-    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
-    
+if DATABASE_URL:
+    # Production (PostgreSQL)
+    DATABASES = {
+        "default": dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=True,
+        )
+    }
+else:
+    # Local & tests (SQLite)
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
+
 # ------------------------
 # Password validation
 # ------------------------
@@ -145,8 +144,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
-
-ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # ------------------------
 # Internationalization
@@ -160,9 +157,7 @@ USE_TZ = True
 # Static files
 # ------------------------
 STATIC_URL = "/static/"
-
 STATICFILES_DIRS = [STATIC_DIR] if DEBUG else []
-
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STORAGES = {
@@ -175,13 +170,13 @@ STORAGES = {
 }
 
 # ------------------------
-# Media files
+# Media
 # ------------------------
 MEDIA_URL = "/media/"
 MEDIA_ROOT = MEDIA_DIR
 
 # ------------------------
-# Summernote (optional defaults)
+# Summernote
 # ------------------------
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
@@ -194,6 +189,6 @@ SUMMERNOTE_CONFIG = {
 }
 
 # ------------------------
-# Default Auto Field
+# Default PK
 # ------------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

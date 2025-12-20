@@ -1,2 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+.venv/
+
+# Django
+db.sqlite3
+/staticfiles
+/media
+
+# Environment
 env.py
-blog/fixtures/
+.env
+
+# OS
+.DS_Store
