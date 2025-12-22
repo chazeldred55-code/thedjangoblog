@@ -14,6 +14,7 @@ class BlogListView(ListView):
     model = Post
     template_name = "blog/index.html"
     context_object_name = "posts"
+    paginate_by = 6  # optional but supported by template
 
     def get_queryset(self):
         return Post.objects.filter(status=1).order_by("-created_on")
@@ -22,11 +23,8 @@ class BlogListView(ListView):
 def post_detail(request, slug):
     """
     Display a single blog post and handle comment submission.
-    Only published posts (status=1) are accessible.
     """
-    queryset = Post.objects.filter(status=1)
-    post = get_object_or_404(queryset, slug=slug)
-
+    post = get_object_or_404(Post, slug=slug, status=1)
     comments = post.comments.filter(approved=True).order_by("-created_on")
     comment_count = comments.count()
 
@@ -41,7 +39,9 @@ def post_detail(request, slug):
                 request,
                 "Comment submitted and awaiting approval"
             )
-            return HttpResponseRedirect(reverse("post_detail", args=[slug]))
+            return HttpResponseRedirect(
+                reverse("post_detail", kwargs={"slug": slug})
+            )
         else:
             messages.error(request, "Error submitting comment!")
     else:
@@ -58,60 +58,56 @@ def post_detail(request, slug):
 
 
 def comment_edit(request, slug, comment_id):
-    """
-    View to edit an existing comment.
-    Handles POST to update the comment and GET to prefill the form.
-    """
-    queryset = Post.objects.filter(status=1)
-    post = get_object_or_404(queryset, slug=slug)
+    post = get_object_or_404(Post, slug=slug, status=1)
     comment = get_object_or_404(Comment, pk=comment_id)
 
-    # Only the comment author can edit
     if comment.author != request.user:
         messages.error(request, "You can only edit your own comments!")
-        return HttpResponseRedirect(reverse("post_detail", args=[slug]))
+        return HttpResponseRedirect(
+            reverse("post_detail", kwargs={"slug": slug})
+        )
 
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST, instance=comment)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.post = post
-            comment.approved = False  # Require re-approval
+            comment.approved = False
             comment.save()
             messages.success(request, "Comment updated!")
-            return HttpResponseRedirect(reverse("post_detail", args=[slug]))
+            return HttpResponseRedirect(
+                reverse("post_detail", kwargs={"slug": slug})
+            )
         else:
             messages.error(request, "Error updating comment!")
     else:
-        # Prefill the form for editing
         comment_form = CommentForm(instance=comment)
 
-    context = {
-        "post": post,
-        "comment_form": comment_form,
-        "comment": comment,
-    }
-
-    return render(request, "blog/comment_edit.html", context)
+    return render(
+        request,
+        "blog/comment_edit.html",
+        {
+            "post": post,
+            "comment": comment,
+            "comment_form": comment_form,
+        },
+    )
 
 
 def comment_delete(request, slug, comment_id):
-    """
-    View to delete an existing comment.
-    Only allows POST requests to prevent accidental deletion.
-    """
-    queryset = Post.objects.filter(status=1)
-    post = get_object_or_404(queryset, slug=slug)
+    post = get_object_or_404(Post, slug=slug, status=1)
     comment = get_object_or_404(Comment, pk=comment_id)
 
     if comment.author != request.user:
         messages.error(request, "You can only delete your own comments!")
-        return HttpResponseRedirect(reverse("post_detail", args=[slug]))
+        return HttpResponseRedirect(
+            reverse("post_detail", kwargs={"slug": slug})
+        )
 
     if request.method == "POST":
         comment.delete()
         messages.success(request, "Comment deleted!")
-    else:
-        messages.error(request, "Invalid request method for deleting comment!")
 
-    return HttpResponseRedirect(reverse("post_detail", args=[slug]))
+    return HttpResponseRedirect(
+        reverse("post_detail", kwargs={"slug": slug})
+    )

@@ -3,6 +3,21 @@ from pathlib import Path
 from decouple import config
 import dj_database_url
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+# ------------------------
+# Cloudinary
+# ------------------------
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": config("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": config("CLOUDINARY_API_KEY"),
+    "API_SECRET": config("CLOUDINARY_API_SECRET"),
+}
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+
 # Load env.py if present
 if os.path.isfile("env.py"):
     import env  # noqa
@@ -22,16 +37,16 @@ MEDIA_DIR = BASE_DIR / "media"
 SECRET_KEY = config("SECRET_KEY", default="unsafe-secret-key")
 DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = [
-    "thedjangoblog.herokuapp.com",
-    ".herokuapp.com",
-    "localhost",
-    "127.0.0.1",
-]
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS",
+    default="localhost,127.0.0.1",
+    cast=lambda v: v.split(","),
+)
 
 CSRF_TRUSTED_ORIGINS = [
     "https://thedjangoblog.herokuapp.com",
 ]
+
 
 # ------------------------
 # Applications
@@ -162,7 +177,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
