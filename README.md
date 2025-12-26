@@ -1,4 +1,4 @@
-The Django Blog – Reddit-Style Forum Application
+#The Django Blog – Reddit-Style Forum Application
 Project Overview
 The Django Blog is a Reddit-style discussion forum built using Python and Django.
 The application allows users to create discussion posts, view posts, comment, edit, and delete content, providing full CRUD functionality in a database-driven full-stack web application.
