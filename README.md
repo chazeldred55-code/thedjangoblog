@@ -1,12 +1,20 @@
 # The Django Blog – Reddit-Style Forum Application
 
-## Project Overview
+## Live Site
+*(Add deployment URL here once deployed – Heroku / Render)*
 
-**The Django Blog** is a Reddit-style discussion forum built using **Python** and **Django**.
+## Repository
+https://github.com/chazeldred55-code/thedjangoblog
 
-The application allows users to create discussion posts, view posts, comment, edit, and delete content, providing full **CRUD functionality** in a database-driven full-stack web application.
+---
 
-This project demonstrates backend development skills using Django, relational databases, and templating, in line with **Code Institute Assignment 3 (L5 Diploma in Web Application Development)** assessment criteria.
+## Project Purpose & Rationale
+
+The Django Blog is a **Reddit-style discussion forum** developed as part of **Unit 3: Back End Development** for the **Level 5 Diploma in Web Application Development**.
+
+The purpose of this project is to design and build a **fully functional, database-driven Full Stack web application** that allows users to create, read, update, and delete discussion content. The project focuses on **server-side logic, relational data modelling, CRUD functionality, testing, deployment, and security**, while also considering **UX design and accessibility**.
+
+The target audience is users who are familiar with forum-style platforms and want a simple, intuitive space to create and engage in online discussions. The application purpose is immediately clear to new users through its layout, navigation, and functionality.
 
 ---
 
@@ -15,7 +23,7 @@ This project demonstrates backend development skills using Django, relational da
 ### Target Audience
 
 - Users who want to create and participate in online discussions
-- Users familiar with forum or Reddit-style layouts
+- Users familiar with Reddit or forum-style platforms
 - Users accessing the application on desktop or mobile devices
 
 ### User Stories
@@ -26,6 +34,18 @@ This project demonstrates backend development skills using Django, relational da
 - As a user, I want to edit my own posts
 - As a user, I want to delete my own posts
 - As a user, I want clear feedback when actions succeed or fail
+
+### UX Design Decisions
+
+- Clear information hierarchy using semantic HTML
+- Consistent layout across all pages
+- Immediate visual feedback for user actions
+- Confirmation prompts for destructive actions (delete)
+- Responsive layout for mobile, tablet, and desktop
+- Simple colour palette and readable typography
+- No unnecessary pop-ups or autoplay media
+
+Accessibility considerations include readable contrast, semantic markup, and intuitive navigation.
 
 ---
 
@@ -40,8 +60,8 @@ This project demonstrates backend development skills using Django, relational da
 - Edit existing posts
 - Delete posts
 - Database-driven content (no hard-coded data)
-- Responsive layout using HTML and CSS
-- User feedback messages on actions (success / error)
+- User feedback messages for success and error states
+- Responsive design using HTML and CSS
 
 ### Future Features
 
@@ -54,29 +74,33 @@ This project demonstrates backend development skills using Django, relational da
 
 ## Data Model
 
-The application uses a relational database (**SQLite** during development).
+The application uses a **relational database** (SQLite during development), designed to reflect a real-world discussion forum domain.
 
-### Models
+### Entity Relationship Overview
 
-#### Post
+#### Post Model
 
-- Title
-- Content
-- Author
-- Created date
+| Field | Type |
+|-----|-----|
+| title | CharField |
+| content | TextField |
+| author | CharField |
+| created_date | DateTimeField |
 
-#### Comment
+#### Comment Model
 
-- Post (Foreign Key)
-- Content
-- Created date
+| Field | Type |
+|-----|-----|
+| post | ForeignKey (Post) |
+| content | TextField |
+| created_date | DateTimeField |
 
 ### Relationships
 
 - One **Post** can have many **Comments**
-- Each **Comment** belongs to a single **Post**
+- Each **Comment** belongs to one **Post**
 
-This structure supports clear CRUD operations and matches the project domain.
+The schema supports efficient CRUD operations and ensures data integrity through relational constraints.
 
 ---
 
@@ -88,6 +112,19 @@ This structure supports clear CRUD operations and matches the project domain.
 - **CSS3**
 - **SQLite** (development)
 - **Git & GitHub**
+- **Heroku / Render** (deployment)
+
+---
+
+## CRUD Functionality
+
+The application fully implements **Create, Read, Update, and Delete** operations:
+
+- **Create:** Users can add posts and comments
+- **Read:** Users can view all posts and individual post details
+- **Update:** Users can edit existing posts
+- **Delete:** Users can delete posts with confirmation
+- All CRUD actions are immediately reflected in the UI
 
 ---
 
@@ -95,94 +132,54 @@ This structure supports clear CRUD operations and matches the project domain.
 
 ### Manual Testing
 
-All core functionality was manually tested to ensure correct behaviour.
-
 | Feature | Action | Expected Result | Outcome |
-|-------|--------|----------------|---------|
-| View posts | Open homepage | List of posts displayed | Pass |
-| Create post | Submit valid form | Post saved to database | Pass |
-| Create post | Submit empty form | Error message shown | Pass |
-| Edit post | Update post content | Changes saved | Pass |
+|------|------|------|------|
+| View posts | Load homepage | Posts displayed | Pass |
+| Create post | Submit valid form | Post saved | Pass |
+| Create post | Submit empty form | Error shown | Pass |
+| Edit post | Update content | Changes saved | Pass |
 | Delete post | Confirm deletion | Post removed | Pass |
 | Add comment | Submit comment | Comment displayed | Pass |
-| Responsive design | Resize screen | Layout adjusts correctly | Pass |
+| Responsive layout | Resize screen | Layout adapts | Pass |
 
 ### Validation Testing
 
-- Forms validate required fields
-- Empty submissions are rejected
-- User feedback is provided for errors
+- Required form fields enforced
+- Empty submissions rejected
+- Error messages displayed clearly
+- Django form validation used throughout
 
 ### Code Validation
 
-- Python code follows **PEP8** guidelines
-- HTML validated using **W3C Validator**
-- CSS validated using **Jigsaw Validator**
+- Python follows **PEP8**
+- HTML validated with **W3C Validator**
+- CSS validated with **Jigsaw Validator**
+
+All discovered bugs were fixed during development. No known unresolved bugs remain.
 
 ---
 
 ## Defensive Design
 
-- User input is validated through Django forms
-- Errors are handled gracefully
-- Users receive feedback when actions succeed or fail
-- Invalid actions do not crash the application
+- All user input validated through Django forms
+- Errors handled gracefully without application crashes
+- User feedback provided for both success and failure
+- Invalid URLs redirect users appropriately
 
 ---
 
 ## Deployment
 
-The project is designed to be deployed to a cloud platform (e.g. **Heroku** or **Render**).
+### Deployment Platform
+Designed for deployment to **Heroku or Render**.
 
 ### Deployment Steps
 
 1. Clone the repository
-2. Install dependencies
-3. Run migrations
-4. Start the Django server
-5. Configure environment variables if deploying live
-
----
-
-## Git Version Control
-
-- Git was used throughout development
-- Meaningful commit messages were written
-- Each feature was committed separately where possible
-- GitHub was used for remote storage
-
----
-
-## Accessibility
-
-- Semantic HTML used throughout
-- Clear navigation structure
-- Readable fonts and colour contrast
-- Responsive layout for multiple devices
-
----
-
-## Credits
-
-- Django Documentation
-- Code Institute learning material
-
----
-
-## Assessment Alignment
-
-This project meets the requirements for:
-
-- Full CRUD functionality
-- Data-driven Django application
-- Clear project purpose
-- Database modelling
-- Testing evidence
-- Clean, readable code
-- UX and accessibility considerations
-
----
-
-## Author
-
-**Chaz Eldred**
+2. Install dependencies using `pip install -r requirements.txt`
+3. Configure environment variables:
+   - `SECRET_KEY`
+   - `DEBUG=False`
+4. Run migrations:
+   ```bash
+   python manage.py migrate
