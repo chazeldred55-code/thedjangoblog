@@ -3,12 +3,38 @@ from pathlib import Path
 from decouple import config
 import dj_database_url
 
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+# ------------------------
+# Load env.py if present
+# ------------------------
+if os.path.isfile("env.py"):
+    import env  # noqa
 
 # ------------------------
-# Cloudinary
+# Paths
+# ------------------------
+BASE_DIR = Path(__file__).resolve().parent.parent
+TEMPLATES_DIR = BASE_DIR / "templates"
+STATIC_DIR = BASE_DIR / "static"
+MEDIA_DIR = BASE_DIR / "media"
+
+# ------------------------
+# Security
+# ------------------------
+SECRET_KEY = config("SECRET_KEY")
+DEBUG = config("DEBUG", cast=bool, default=False)
+
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS",
+    default="localhost,127.0.0.1",
+    cast=lambda v: [host.strip() for host in v.split(",")],
+)
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://thedjangoblog.herokuapp.com",
+]
+
+# ------------------------
+# Cloudinary Configuration
 # ------------------------
 CLOUDINARY_STORAGE = {
     "CLOUD_NAME": config("CLOUDINARY_CLOUD_NAME"),
@@ -17,36 +43,6 @@ CLOUDINARY_STORAGE = {
 }
 
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
-
-# Load env.py if present
-if os.path.isfile("env.py"):
-    import env  # noqa
-
-# ------------------------
-# Paths
-# ------------------------
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-TEMPLATES_DIR = BASE_DIR / "templates"
-STATIC_DIR = BASE_DIR / "static"
-MEDIA_DIR = BASE_DIR / "media"
-
-# ------------------------
-# Security
-# ------------------------
-SECRET_KEY = config("SECRET_KEY", default="unsafe-secret-key")
-DEBUG = config("DEBUG", default=True, cast=bool)
-
-ALLOWED_HOSTS = config(
-    "ALLOWED_HOSTS",
-    default="localhost,127.0.0.1",
-    cast=lambda v: v.split(","),
-)
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://thedjangoblog.herokuapp.com",
-]
-
 
 # ------------------------
 # Applications
@@ -133,7 +129,6 @@ TEMPLATES = [
 DATABASE_URL = config("DATABASE_URL", default=None)
 
 if DATABASE_URL:
-    # Production (PostgreSQL)
     DATABASES = {
         "default": dj_database_url.config(
             default=DATABASE_URL,
@@ -142,7 +137,6 @@ if DATABASE_URL:
         )
     }
 else:
-    # Local & tests (SQLite)
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
