@@ -3,7 +3,10 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
 # Post status choices
-STATUS = ((0, "Draft"), (1, "Published"))
+STATUS = (
+    (0, "Draft"),
+    (1, "Published"),
+)
 
 
 class Category(models.Model):
@@ -27,20 +30,22 @@ class Post(models.Model):
     )
     featured_image = CloudinaryField('image', default='placeholder')
     content = models.TextField()
+    excerpt = models.TextField(blank=True)
+    status = models.IntegerField(choices=STATUS, default=1)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    status = models.IntegerField(choices=STATUS, default=1)
-    excerpt = models.TextField(blank=True)
 
     class Meta:
         ordering = ["-created_on"]
+        verbose_name = "Post"
+        verbose_name_plural = "Posts"
 
     def __str__(self):
         return f"{self.title} | written by {self.author}"
 
 
 class Comment(models.Model):
-    """Comment model for posts (threaded optional)"""
+    """Comment model for posts (supports threaded replies)"""
     post = models.ForeignKey(
         Post, on_delete=models.CASCADE, related_name="comments"
     )
@@ -52,10 +57,12 @@ class Comment(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     parent = models.ForeignKey(
         'self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies'
-    )  # Optional threaded comments
+    )
 
     class Meta:
         ordering = ["created_on"]
+        verbose_name = "Comment"
+        verbose_name_plural = "Comments"
 
     def __str__(self):
         return f"Comment {self.body[:20]} by {self.author}"
@@ -69,6 +76,8 @@ class Vote(models.Model):
 
     class Meta:
         unique_together = ('user', 'post')
+        verbose_name = "Vote"
+        verbose_name_plural = "Votes"
 
     def __str__(self):
         return f"{self.user} voted {self.value} on {self.post.title}"
