@@ -31,6 +31,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 USE_X_FORWARDED_HOST = True
 
+APPEND_SLASH = False
+
 # CSRF trusted origins for Heroku
 CSRF_TRUSTED_ORIGINS = [
     "https://thedjangoblog-5115dd98e142.herokuapp.com",
