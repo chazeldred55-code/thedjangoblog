@@ -22,19 +22,18 @@ MEDIA_DIR = BASE_DIR / "media"
 # ------------------------
 SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", cast=bool, default=False)
-
-# ALLOWED_HOSTS (Heroku + local development)
-ALLOWED_HOSTS = config(
-    "ALLOWED_HOSTS",
-    default="localhost,127.0.0.1,thedjangoblog-5115dd98e142.herokuapp.com",
-    cast=lambda v: [host.strip() for host in v.split(",")],
-)
+ALLOWED_HOSTS = [
+    "thedjangoblog-5115dd98e142.herokuapp.com",
+    ".herokuapp.com",
+]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+USE_X_FORWARDED_HOST = True
+
 # CSRF trusted origins for Heroku
 CSRF_TRUSTED_ORIGINS = [
-    "https://thedjangoblog.herokuapp.com",
+    "https://thedjangoblog-5115dd98e142.herokuapp.com",
 ]
 
 # ------------------------

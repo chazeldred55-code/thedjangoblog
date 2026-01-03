@@ -7,6 +7,9 @@ from .models import Post, Comment
 from .forms import CommentForm
 
 
+# -------------------------
+# Blog list view (home page)
+# -------------------------
 class BlogListView(ListView):
     """
     Displays a list of all published blog posts on the home page.
@@ -14,17 +17,20 @@ class BlogListView(ListView):
     model = Post
     template_name = "blog/index.html"
     context_object_name = "posts"
-    paginate_by = 6  # optional but supported by template
+    paginate_by = 6
 
     def get_queryset(self):
-        return Post.objects.filter(status=1).order_by("-created_on")
+        return Post.objects.filter(status="published").order_by("-created_on")
 
 
+# -------------------------
+# Blog post detail view
+# -------------------------
 def post_detail(request, slug):
     """
-    Display a single blog post and handle comment submission.
+    Display a single published blog post and handle comment submission.
     """
-    post = get_object_or_404(Post, slug=slug, status=1)
+    post = get_object_or_404(Post, slug=slug, status="published")
     comments = post.comments.filter(approved=True).order_by("-created_on")
     comment_count = comments.count()
 
@@ -35,13 +41,8 @@ def post_detail(request, slug):
             comment.author = request.user
             comment.post = post
             comment.save()
-            messages.success(
-                request,
-                "Comment submitted and awaiting approval"
-            )
-            return HttpResponseRedirect(
-                reverse("post_detail", kwargs={"slug": slug})
-            )
+            messages.success(request, "Comment submitted and awaiting approval")
+            return HttpResponseRedirect(reverse("post_detail", kwargs={"slug": slug}))
         else:
             messages.error(request, "Error submitting comment!")
     else:
@@ -53,31 +54,29 @@ def post_detail(request, slug):
         "comment_count": comment_count,
         "comment_form": comment_form,
     }
-
     return render(request, "blog/post_detail.html", context)
 
 
+# -------------------------
+# Edit a comment
+# -------------------------
 def comment_edit(request, slug, comment_id):
-    post = get_object_or_404(Post, slug=slug, status=1)
+    post = get_object_or_404(Post, slug=slug, status="published")
     comment = get_object_or_404(Comment, pk=comment_id)
 
     if comment.author != request.user:
         messages.error(request, "You can only edit your own comments!")
-        return HttpResponseRedirect(
-            reverse("post_detail", kwargs={"slug": slug})
-        )
+        return HttpResponseRedirect(reverse("post_detail", kwargs={"slug": slug}))
 
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST, instance=comment)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.post = post
-            comment.approved = False
+            comment.approved = False  # Reset approval after edit
             comment.save()
             messages.success(request, "Comment updated!")
-            return HttpResponseRedirect(
-                reverse("post_detail", kwargs={"slug": slug})
-            )
+            return HttpResponseRedirect(reverse("post_detail", kwargs={"slug": slug}))
         else:
             messages.error(request, "Error updating comment!")
     else:
@@ -86,28 +85,23 @@ def comment_edit(request, slug, comment_id):
     return render(
         request,
         "blog/comment_edit.html",
-        {
-            "post": post,
-            "comment": comment,
-            "comment_form": comment_form,
-        },
+        {"post": post, "comment": comment, "comment_form": comment_form},
     )
 
 
+# -------------------------
+# Delete a comment
+# -------------------------
 def comment_delete(request, slug, comment_id):
-    post = get_object_or_404(Post, slug=slug, status=1)
+    post = get_object_or_404(Post, slug=slug, status="published")
     comment = get_object_or_404(Comment, pk=comment_id)
 
     if comment.author != request.user:
         messages.error(request, "You can only delete your own comments!")
-        return HttpResponseRedirect(
-            reverse("post_detail", kwargs={"slug": slug})
-        )
+        return HttpResponseRedirect(reverse("post_detail", kwargs={"slug": slug}))
 
     if request.method == "POST":
         comment.delete()
         messages.success(request, "Comment deleted!")
 
-    return HttpResponseRedirect(
-        reverse("post_detail", kwargs={"slug": slug})
-    )
+    return HttpResponseRedirect(reverse("post_detail", kwargs={"slug": slug}))
