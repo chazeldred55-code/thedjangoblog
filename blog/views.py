@@ -20,7 +20,8 @@ class BlogListView(ListView):
     paginate_by = 6
 
     def get_queryset(self):
-        return Post.objects.filter(status="published").order_by("-created_on")
+        return Post.objects.filter(status=1).order_by("-created_on")
+
 
 
 # -------------------------
