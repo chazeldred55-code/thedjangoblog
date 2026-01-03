@@ -173,6 +173,10 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [STATIC_DIR] if DEBUG else []
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+# Ensure ManifestStorage is used in production
+if not DEBUG:
+    STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
