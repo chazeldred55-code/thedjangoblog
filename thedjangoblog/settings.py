@@ -167,16 +167,24 @@ USE_I18N = True
 USE_TZ = True
 
 # ------------------------
-# Static files
+# Static files (CSS, JavaScript, Images)
 # ------------------------
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [STATIC_DIR] if DEBUG else []
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# Ensure ManifestStorage is used in production
-if not DEBUG:
-    STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+# During development, include the local static folder
+if DEBUG:
+    STATICFILES_DIRS = [STATIC_DIR]
 
+# Use WhiteNoise's compressed manifest storage in production
+if not DEBUG:
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# ------------------------
+# Media files (user uploads)
+# ------------------------
+MEDIA_URL = "/media/"
+MEDIA_ROOT = MEDIA_DIR
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
