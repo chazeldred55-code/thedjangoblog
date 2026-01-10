@@ -178,6 +178,7 @@ STATIC_DIR = BASE_DIR / "static"
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+<<<<<<< HEAD
 # During development, include local static folder
 if DEBUG:
     STATICFILES_DIRS = [STATIC_DIR]
@@ -203,6 +204,16 @@ if not DEBUG:
 # Ensure your favicon exists here:
 # static/images/favicon.ico
 
+=======
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+# During development, include the local static folder
+if DEBUG:
+    STATICFILES_DIRS = [STATIC_DIR]
+
+>>>>>>> e650bbc (Save local changes before pull)
 # ------------------------
 # Media files (user uploads)
 # ------------------------
