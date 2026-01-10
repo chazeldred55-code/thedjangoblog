@@ -28,9 +28,7 @@ ALLOWED_HOSTS = [
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
 USE_X_FORWARDED_HOST = True
-
 APPEND_SLASH = False
 
 # CSRF trusted origins for Heroku
@@ -39,7 +37,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 # ------------------------
-# Cloudinary Configuration
+# Cloudinary Configuration (Media)
 # ------------------------
 CLOUDINARY_STORAGE = {
     "CLOUD_NAME": config("CLOUDINARY_CLOUD_NAME"),
@@ -72,7 +70,7 @@ INSTALLED_APPS = [
     "cloudinary",
     "cloudinary_storage",
 
-    # Local
+    # Local apps
     "about",
     "blog",
 ]
@@ -80,7 +78,6 @@ INSTALLED_APPS = [
 SITE_ID = 1
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
-
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 ACCOUNT_EMAIL_VERIFICATION = "none"
@@ -90,15 +87,13 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 # ------------------------
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # Heroku static
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-
     "allauth.account.middleware.AccountMiddleware",
 ]
 
@@ -126,6 +121,24 @@ TEMPLATES = [
         },
     },
 ]
+
+# ------------------------
+# Static files (CSS, JS, Images)
+# ------------------------
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"  # collectstatic destination
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # ------------------------
 # Database
@@ -184,6 +197,9 @@ SUMMERNOTE_CONFIG = {
 # ------------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# ------------------------
+# Logging
+# ------------------------
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,

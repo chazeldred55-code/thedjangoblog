@@ -1,15 +1,4 @@
 {% load static %}
-<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
-
-{# ---- Core site URLs ---- #}
-{% url 'home' as home_url %}
-{% url 'about' as about_url %}
-{% url 'blog_list' as blog_url %}
-
-{# ---- Authentication URLs ---- #}
-{% url 'account_login' as login_url %}
-{% url 'account_signup' as signup_url %}
-{% url 'account_logout' as logout_url %}
 
 <!DOCTYPE html>
 <html lang="en" class="h-100">
@@ -18,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Code|Star{% endblock %}</title>
 
-     <!-- Favicon -->
+    <!-- Favicon -->
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 
@@ -31,140 +20,98 @@
 
 <body class="d-flex flex-column h-100 main-bg">
 
-    <!-- ░░░ NAVIGATION BAR ░░░ -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm" aria-label="Main Navigation">
-        <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm" aria-label="Main Navigation">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <span class="brand">c<span class="red-o">o</span>de<span class="thin">|star</span></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarText" aria-controls="navbarText"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <!-- Brand -->
-            <a class="navbar-brand" href="{% url 'home' %}">
-                <span class="brand">
-                    c<span class="red-o">o</span>de<span class="thin">|star</span>
-                </span>
-            </a>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == home_url %}active{% endif %}"
+                       href="{{ home_url }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path|slice:':6' == '/blog/' %}active{% endif %}"
+                       href="{{ blog_url }}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == about_url %}active{% endif %}"
+                       href="{{ about_url }}">About</a>
+                </li>
+            </ul>
 
-            <!-- Mobile Toggle -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarText" aria-controls="navbarText"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Navbar Links -->
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                    <!-- HOME -->
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.path == home_url %}active{% endif %}"
-                           href="{{ home_url }}">Home</a>
+            <ul class="navbar-nav ms-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown"
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ user.username }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/accounts/email/">Manage Account</a></li>
+                            {% if user.is_staff %}
+                            <li><a class="dropdown-item" href="/admin/">Admin Panel</a></li>
+                            {% endif %}
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{ logout_url }}">Logout</a></li>
+                        </ul>
                     </li>
-
-                    <!-- BLOG -->
+                {% else %}
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path|slice:':6' == '/blog/' %}active{% endif %}"
-                           href="{{ blog_url }}">Blog</a>
+                        <a class="nav-link {% if request.path == login_url %}active{% endif %}"
+                           href="{{ login_url }}">Login</a>
                     </li>
-
-                    <!-- ABOUT -->
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == about_url %}active{% endif %}"
-                           href="{{ about_url }}">About</a>
+                        <a class="nav-link {% if request.path == signup_url %}active{% endif %}"
+                           href="{{ signup_url }}">Register</a>
                     </li>
-                </ul>
+                {% endif %}
+            </ul>
 
-                <!-- RIGHT SIDE NAVBAR AREA -->
-                <ul class="navbar-nav ms-auto">
-
-                    {% if user.is_authenticated %}
-
-                        <!-- ▼ USER DROPDOWN WHEN LOGGED IN ▼ -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown"
-                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ user.username }}
-                            </a>
-
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="/accounts/email/">Manage Account</a></li>
-
-                                {% if user.is_staff %}
-                                <li>
-                                    <a class="dropdown-item" href="/admin/">Admin Panel</a>
-                                </li>
-                                {% endif %}
-
-                                <li><hr class="dropdown-divider"></li>
-
-                                <li>
-                                    <a class="dropdown-item" href="{{ logout_url }}">Logout</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                    {% else %}
-
-                        <!-- LOGIN -->
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.path == login_url %}active{% endif %}"
-                               href="{{ login_url }}">Login</a>
-                        </li>
-
-                        <!-- REGISTER -->
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.path == signup_url %}active{% endif %}"
-                               href="{{ signup_url }}">Register</a>
-                        </li>
-
-                    {% endif %}
-                </ul>
-
-                <span class="navbar-text text-muted ms-3">
-                    adventures of a software developer
-                </span>
-            </div>
+            <span class="navbar-text text-muted ms-3">
+                adventures of a software developer
+            </span>
         </div>
-    </nav>
-<!-- displaying Django messages -->
+    </div>
+</nav>
+
+<!-- Django messages -->
 <div class="container">
   <div class="row">
     <div class="col-md-8 offset-md-2">
       {% for message in messages %}
-      <div class="alert {{ message.tags }} alert-dismissible
-        fade show" id="msg" role="alert">
-        {{ message | safe }}
-        <button type="button" class="btn-close"
-          data-bs-dismiss="alert" aria-label="Close"></button>
+      <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+        {{ message|safe }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       {% endfor %}
     </div>
   </div>
-</div>gi
-    <!-- ░░░ MAIN CONTENT ░░░ -->
-    <main class="flex-shrink-0 main-bg" role="main">
+</div>
 
-        {% if user.is_authenticated %}
-            <p class="text-end m-3 text-success">
-                Logged in as <strong>{{ user.username }}</strong>
-            </p>
-        {% else %}
-            <p class="text-end m-3 text-danger">
-                You are not logged in
-            </p>
-        {% endif %}
+<main class="flex-shrink-0 main-bg" role="main">
+    {% if user.is_authenticated %}
+        <p class="text-end m-3 text-success">Logged in as <strong>{{ user.username }}</strong></p>
+    {% else %}
+        <p class="text-end m-3 text-danger">You are not logged in</p>
+    {% endif %}
 
-        {% block content %}
-        {% endblock %}
-    </main>
+    {% block content %}{% endblock %}
+</main>
 
-    <!-- ░░░ FOOTER ░░░ -->
 <footer class="footer mt-auto py-3 bg-light text-center">
     <div class="container">
         <span class="text-muted">&copy; {% now "Y" %} Code|Star. All rights reserved.</span>
     </div>
 </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
