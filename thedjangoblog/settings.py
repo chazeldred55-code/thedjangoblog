@@ -28,7 +28,9 @@ ALLOWED_HOSTS = [
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 USE_X_FORWARDED_HOST = True
+
 APPEND_SLASH = False
 
 # CSRF trusted origins for Heroku
@@ -165,38 +167,6 @@ USE_I18N = True
 USE_TZ = True
 
 # ------------------------
-# Static files (CSS, JavaScript, Images)
-# ------------------------
-STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [STATIC_DIR]
-
-if not DEBUG:
-    # Use WhiteNoise for production
-    from django.contrib.staticfiles.storage import ManifestStaticFilesStorage
-
-    class IgnoreMissingManifestStaticFilesStorage(ManifestStaticFilesStorage):
-        def post_process(self, *args, **kwargs):
-            try:
-                return super().post_process(*args, **kwargs)
-            except ValueError:
-                return [], True
-
-    STATICFILES_STORAGE = "thedjangoblog.settings.IgnoreMissingManifestStaticFilesStorage"
-
-# ------------------------
-# Media files (user uploads)
-# ------------------------
-MEDIA_URL = "/media/"
-MEDIA_ROOT = MEDIA_DIR
-STORAGES = {
-    "default": {
-        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
-    },
-    #"staticfiles": {  "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    }
-
-# ------------------------
 # Summernote
 # ------------------------
 X_FRAME_OPTIONS = "SAMEORIGIN"
@@ -214,9 +184,6 @@ SUMMERNOTE_CONFIG = {
 # ------------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# ------------------------
-# Logging
-# ------------------------
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
