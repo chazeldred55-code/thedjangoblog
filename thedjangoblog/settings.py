@@ -169,16 +169,39 @@ USE_TZ = True
 # ------------------------
 # Static files (CSS, JavaScript, Images)
 # ------------------------
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+STATIC_DIR = BASE_DIR / "static"
+
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# During development, include the local static folder
+# During development, include local static folder
 if DEBUG:
     STATICFILES_DIRS = [STATIC_DIR]
 
-# Use WhiteNoise's compressed manifest storage in production
+# Production settings for Heroku
 if not DEBUG:
+    # Use WhiteNoise to serve static files
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+    # Optional: ignore missing static files in manifest to prevent 500 errors
+    from django.contrib.staticfiles.storage import ManifestStaticFilesStorage
+
+    class IgnoreMissingManifestStaticFilesStorage(ManifestStaticFilesStorage):
+        def post_process(self, *args, **kwargs):
+            try:
+                return super().post_process(*args, **kwargs)
+            except ValueError:
+                # Ignore missing files (like favicon) instead of crashing
+                return [], True
+
+    STATICFILES_STORAGE = "your_project.settings.IgnoreMissingManifestStaticFilesStorage"
+
+# Ensure your favicon exists here:
+# static/images/favicon.ico
 
 # ------------------------
 # Media files (user uploads)
