@@ -28,9 +28,7 @@ ALLOWED_HOSTS = [
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
 USE_X_FORWARDED_HOST = True
-
 APPEND_SLASH = False
 
 # CSRF trusted origins for Heroku
@@ -169,26 +167,12 @@ USE_TZ = True
 # ------------------------
 # Static files (CSS, JavaScript, Images)
 # ------------------------
-import os
-from pathlib import Path
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-STATIC_DIR = BASE_DIR / "static"
-
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [STATIC_DIR]
 
-<<<<<<< HEAD
-# During development, include local static folder
-if DEBUG:
-    STATICFILES_DIRS = [STATIC_DIR]
-
-# Production settings for Heroku
 if not DEBUG:
-    # Use WhiteNoise to serve static files
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-    # Optional: ignore missing static files in manifest to prevent 500 errors
+    # Use WhiteNoise for production
     from django.contrib.staticfiles.storage import ManifestStaticFilesStorage
 
     class IgnoreMissingManifestStaticFilesStorage(ManifestStaticFilesStorage):
@@ -196,24 +180,10 @@ if not DEBUG:
             try:
                 return super().post_process(*args, **kwargs)
             except ValueError:
-                # Ignore missing files (like favicon) instead of crashing
                 return [], True
 
-    STATICFILES_STORAGE = "your_project.settings.IgnoreMissingManifestStaticFilesStorage"
+    STATICFILES_STORAGE = "thedjangoblog.settings.IgnoreMissingManifestStaticFilesStorage"
 
-# Ensure your favicon exists here:
-# static/images/favicon.ico
-
-=======
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
-
-# During development, include the local static folder
-if DEBUG:
-    STATICFILES_DIRS = [STATIC_DIR]
-
->>>>>>> e650bbc (Save local changes before pull)
 # ------------------------
 # Media files (user uploads)
 # ------------------------
@@ -227,12 +197,6 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-
-# ------------------------
-# Media
-# ------------------------
-MEDIA_URL = "/media/"
-MEDIA_ROOT = MEDIA_DIR
 
 # ------------------------
 # Summernote
@@ -252,6 +216,9 @@ SUMMERNOTE_CONFIG = {
 # ------------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# ------------------------
+# Logging
+# ------------------------
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
