@@ -171,32 +171,19 @@ STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [STATIC_DIR]
 
-if not DEBUG:
-    # Use WhiteNoise for production
-    from django.contrib.staticfiles.storage import ManifestStaticFilesStorage
-
-    class IgnoreMissingManifestStaticFilesStorage(ManifestStaticFilesStorage):
-        def post_process(self, *args, **kwargs):
-            try:
-                return super().post_process(*args, **kwargs)
-            except ValueError:
-                return [], True
-
-    STATICFILES_STORAGE = "thedjangoblog.settings.IgnoreMissingManifestStaticFilesStorage"
+# Use WhiteNoise for production with manifest support
+STATICFILES_STORAGE = (
+    "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    if not DEBUG else "django.contrib.staticfiles.storage.StaticFilesStorage"
+)
 
 # ------------------------
 # Media files (user uploads)
 # ------------------------
 MEDIA_URL = "/media/"
 MEDIA_ROOT = MEDIA_DIR
-STORAGES = {
-    "default": {
-        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
+# Cloudinary is already configured above:
+# DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 # ------------------------
 # Summernote
