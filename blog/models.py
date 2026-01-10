@@ -81,3 +81,19 @@ class Vote(models.Model):
 
     def __str__(self):
         return f"{self.user} voted {self.value} on {self.post.title}"
+
+
+# ------------------------
+# Profile model (fixed)
+# ------------------------
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # Store relative path only, no static() call
+    avatar_url = models.CharField(
+        max_length=255,
+        default="images/no-profile-photo.png"
+    )
+    bio = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.user.username} Profile"
