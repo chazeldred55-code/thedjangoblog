@@ -12,8 +12,8 @@ urlpatterns = [
     ),
 
     # Local apps (alphabetical)
-    path("about/", include("about.urls"), name="about-urls"),
-    path("", include("blog.urls"), name="blog-urls"),
+    path("about/", include("about.urls")),
+    path("", include("blog.urls")),
 
     # Third-party apps
     path("accounts/", include("allauth.urls")),

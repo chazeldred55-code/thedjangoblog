@@ -20,18 +20,14 @@ class BlogListView(ListView):
     paginate_by = 6
 
     def get_queryset(self):
-        return Post.objects.filter(status=1).order_by("-created_on")
-
+        return Post.objects.filter(status=Post.PUBLISHED).order_by("-created_on")
 
 
 # -------------------------
 # Blog post detail view
 # -------------------------
 def post_detail(request, slug):
-    """
-    Display a single published blog post and handle comment submission.
-    """
-    post = get_object_or_404(Post, slug=slug, status="published")
+    post = get_object_or_404(Post, slug=slug, status=Post.PUBLISHED)
     comments = post.comments.filter(approved=True).order_by("-created_on")
     comment_count = comments.count()
 
@@ -62,7 +58,7 @@ def post_detail(request, slug):
 # Edit a comment
 # -------------------------
 def comment_edit(request, slug, comment_id):
-    post = get_object_or_404(Post, slug=slug, status="published")
+    post = get_object_or_404(Post, slug=slug, status=Post.PUBLISHED)
     comment = get_object_or_404(Comment, pk=comment_id)
 
     if comment.author != request.user:
@@ -74,7 +70,7 @@ def comment_edit(request, slug, comment_id):
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.post = post
-            comment.approved = False  # Reset approval after edit
+            comment.approved = False
             comment.save()
             messages.success(request, "Comment updated!")
             return HttpResponseRedirect(reverse("post_detail", kwargs={"slug": slug}))
@@ -94,7 +90,7 @@ def comment_edit(request, slug, comment_id):
 # Delete a comment
 # -------------------------
 def comment_delete(request, slug, comment_id):
-    post = get_object_or_404(Post, slug=slug, status="published")
+    post = get_object_or_404(Post, slug=slug, status=Post.PUBLISHED)
     comment = get_object_or_404(Comment, pk=comment_id)
 
     if comment.author != request.user:

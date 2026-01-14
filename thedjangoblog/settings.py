@@ -25,8 +25,9 @@ DEBUG = config("DEBUG", cast=bool, default=False)
 ALLOWED_HOSTS = [
     "thedjangoblog-5115dd98e142.herokuapp.com",
     ".herokuapp.com",
+    "127.0.0.1",
+    "localhost",
 ]
-
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 USE_X_FORWARDED_HOST = True
 APPEND_SLASH = False
@@ -148,6 +149,10 @@ DATABASE_URL = config("DATABASE_URL", default="")
 
 if DATABASE_URL and "heroku" in DATABASE_URL:
     # Heroku / production
+=======
+if DATABASE_URL:
+    # Heroku / production database
+>>>>>>> bf9d77a (Resolve merge conflicts and update blog)
     DATABASES = {
         "default": dj_database_url.parse(
             DATABASE_URL,
@@ -155,8 +160,7 @@ if DATABASE_URL and "heroku" in DATABASE_URL:
             ssl_require=True,
         )
     }
-else:
-    # Local development
+    # Local development using SQLite
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
