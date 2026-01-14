@@ -9,9 +9,19 @@ from .models import Post, Comment, Category, Vote, Profile
 class CommentInline(admin.TabularInline):
     model = Comment
     extra = 0
-    fields = ('author', 'body', 'approved', 'created_on')
-    readonly_fields = ('created_on',)
-    ordering = ('-created_on',)
+    fields = ("author", "body", "approved", "created_on")
+    readonly_fields = ("created_on",)
+    ordering = ("-created_on",)
+
+
+# ------------------------
+# Category admin
+# ------------------------
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ("name", "description")
+    search_fields = ("name", "description")
+    ordering = ("name",)
 
 
 # ------------------------
@@ -19,11 +29,11 @@ class CommentInline(admin.TabularInline):
 # ------------------------
 @admin.register(Post)
 class PostAdmin(SummernoteModelAdmin):
-    list_display = ('title', 'slug', 'status', 'created_on')
-    search_fields = ('title', 'content')
-    list_filter = ('status', 'created_on')
-    prepopulated_fields = {'slug': ('title',)}
-    summernote_fields = ('content',)
+    list_display = ("title", "category", "slug", "status", "created_on")
+    search_fields = ("title", "content")
+    list_filter = ("status", "category", "created_on")
+    prepopulated_fields = {"slug": ("title",)}
+    summernote_fields = ("content",)
     inlines = [CommentInline]
 
 
@@ -32,15 +42,14 @@ class PostAdmin(SummernoteModelAdmin):
 # ------------------------
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('author', 'post', 'approved', 'created_on')
-    list_filter = ('approved', 'created_on')
-    search_fields = ('author__username', 'body')
-    ordering = ('-created_on',)
+    list_display = ("author", "post", "approved", "created_on")
+    list_filter = ("approved", "created_on")
+    search_fields = ("author__username", "body")
+    ordering = ("-created_on",)
 
 
 # ------------------------
-# Register simple models
+# Register remaining simple models
 # ------------------------
-admin.site.register(Category)
 admin.site.register(Vote)
 admin.site.register(Profile)
