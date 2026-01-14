@@ -109,3 +109,76 @@
         font-size: 0.9rem;
     }
 }
+/* -------------------------
+   Navbar styling (brand-aligned)
+-------------------------- */
+.navbar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.navbar .navbar-brand {
+    font-weight: 700;
+    text-transform: lowercase;
+}
+
+.navbar .navbar-brand .brand {
+    font-size: 1.35rem;
+    letter-spacing: 0.5px;
+}
+
+/* Links */
+.navbar .nav-link {
+    font-weight: 600;
+    padding: 0.65rem 0.9rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.navbar .nav-link:hover {
+    background-color: rgba(24, 129, 129, 0.10); /* brand teal tint */
+    color: #188181;
+}
+
+.navbar .nav-link.active {
+    background-color: rgba(24, 129, 129, 0.16); /* stronger brand tint */
+    color: #188181;
+}
+
+/* Improve keyboard focus visibility */
+.navbar .nav-link:focus-visible,
+.navbar .navbar-brand:focus-visible,
+.navbar .dropdown-toggle:focus-visible {
+    outline: 3px solid rgba(24, 129, 129, 0.35);
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+}
+
+/* Dropdown */
+.navbar .dropdown-menu {
+    border-radius: 0.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.navbar .dropdown-item:hover {
+    background-color: rgba(24, 129, 129, 0.10);
+}
+
+.navbar .dropdown-item:active {
+    background-color: #188181;
+    color: #fff;
+}
+
+.navbar .navbar-text {
+    font-size: 0.95rem;
+}
+
+/* Brand accents */
+.red-o {
+    color: #dc3545;
+    font-weight: 800;
+}
+
+.thin {
+    font-weight: 300;
+}
