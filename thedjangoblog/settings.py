@@ -144,16 +144,7 @@ STORAGES = {
 # ------------------------
 # Database
 # ------------------------
-
-DATABASE_URL = config("DATABASE_URL", default="")
-
-if DATABASE_URL and "heroku" in DATABASE_URL:
-    # Heroku / production
-=======
-if DATABASE_URL:
-    # Heroku / production database
->>>>>>> bf9d77a (Resolve merge conflicts and update blog)
-    DATABASES = {
+DATABASES = {
         "default": dj_database_url.parse(
             DATABASE_URL,
             conn_max_age=600,
