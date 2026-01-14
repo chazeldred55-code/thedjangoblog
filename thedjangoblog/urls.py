@@ -4,6 +4,9 @@ from django.views.generic import RedirectView
 from django.conf import settings
 
 urlpatterns = [
+    # Home
+    path("", RedirectView.as_view(pattern_name="blog_home", permanent=False), name="home"),
+    
     path("favicon.ico", RedirectView.as_view(url=settings.STATIC_URL + "images/favicon.ico"), name="favicon"),
 
     path("about/", include("about.urls")),
