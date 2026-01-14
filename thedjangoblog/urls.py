@@ -4,21 +4,15 @@ from django.views.generic import RedirectView
 from django.conf import settings
 
 urlpatterns = [
-    # Favicon redirect
-    path(
-        "favicon.ico",
-        RedirectView.as_view(url=settings.STATIC_URL + "images/favicon.ico"),
-        name="favicon",
-    ),
+    path("favicon.ico", RedirectView.as_view(url=settings.STATIC_URL + "images/favicon.ico"), name="favicon"),
 
-    # Local apps (alphabetical)
     path("about/", include("about.urls")),
-    path("", include("blog.urls")),
+    path("blog/", include("blog.urls")),  # homepage now at /blog/
 
-    # Third-party apps
     path("accounts/", include("allauth.urls")),
     path("summernote/", include("django_summernote.urls")),
-
-    # Django admin
     path("admin/", admin.site.urls),
+
+    # Redirect / to /blog/ so homepage works
+    path("", RedirectView.as_view(url="/blog/", permanent=False)),
 ]

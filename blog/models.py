@@ -2,13 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
-# Post status choices
-STATUS = (
-    (0, "Draft"),
-    (1, "Published"),
-)
-
-
+# ------------------------
+# Category model
+# ------------------------
 class Category(models.Model):
     """Subreddit-style categories for posts"""
     name = models.CharField(max_length=100, unique=True)
@@ -18,8 +14,20 @@ class Category(models.Model):
         return self.name
 
 
+# ------------------------
+# Post model
+# ------------------------
 class Post(models.Model):
     """Post model for Reddit-style forum"""
+
+    # Status constants
+    DRAFT = 0
+    PUBLISHED = 1
+    STATUS_CHOICES = (
+        (DRAFT, "Draft"),
+        (PUBLISHED, "Published"),
+    )
+
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(
@@ -31,7 +39,7 @@ class Post(models.Model):
     featured_image = CloudinaryField('image', default='placeholder')
     content = models.TextField()
     excerpt = models.TextField(blank=True)
-    status = models.IntegerField(choices=STATUS, default=1)
+    status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -44,6 +52,9 @@ class Post(models.Model):
         return f"{self.title} | written by {self.author}"
 
 
+# ------------------------
+# Comment model
+# ------------------------
 class Comment(models.Model):
     """Comment model for posts (supports threaded replies)"""
     post = models.ForeignKey(
@@ -68,6 +79,9 @@ class Comment(models.Model):
         return f"Comment {self.body[:20]} by {self.author}"
 
 
+# ------------------------
+# Vote model
+# ------------------------
 class Vote(models.Model):
     """Vote model to track upvotes and downvotes"""
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -84,11 +98,11 @@ class Vote(models.Model):
 
 
 # ------------------------
-# Profile model (fixed)
+# Profile model
 # ------------------------
 class Profile(models.Model):
+    """User profile with avatar and bio"""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # Store relative path only, no static() call
     avatar_url = models.CharField(
         max_length=255,
         default="images/no-profile-photo.png"
