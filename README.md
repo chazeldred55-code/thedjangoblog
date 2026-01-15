@@ -167,6 +167,15 @@ The application fully implements **Create, Read, Update, and Delete** operations
 
 <img width="1026" height="151" alt="image" src="https://github.com/user-attachments/assets/5e3146d1-1bb9-4259-b1af-2eb7d1fce68d" />
 
+### UX Design screenshots 
+## Home / Blog
+Laptop
+<img width="1918" height="1011" alt="image" src="https://github.com/user-attachments/assets/533872d2-40bc-4336-bec2-393a36ab9903" />
+Tablet 
+<img width="508" height="753" alt="image" src="https://github.com/user-attachments/assets/638d476c-ca67-4c3c-a16a-a9e6af1ea58f" />
+Phone 
+<img width="417" height="753" alt="image" src="https://github.com/user-attachments/assets/a93d2f55-75a8-40a6-a0ff-06a85fec9c0e" />
+
 
 
 
