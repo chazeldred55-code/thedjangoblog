@@ -134,17 +134,21 @@ The application fully implements **Create, Read, Update, and Delete** operations
 
 
 
-| Feature | Action | Expected Result | Outcome |
-|------|------|------|------|
-| View posts <img width="1915" height="1017" alt="image" src="https://github.com/user-attachments/assets/d5fc3ec6-9b6d-4fe9-9957-f5389af48aaf" />
- | Load homepage <img width="1918" height="1022" alt="image" src="https://github.com/user-attachments/assets/51ce1009-4fb0-4eed-ba89-e3862d5dda7f" />
-| Pass |
-| Create post | Submit valid form | Post saved | Pass |
-| Create post | Submit empty form | Error shown | Pass |
-| Edit post | Update content | Changes saved | Pass |
-| Delete post | Confirm deletion | Post removed | Pass |
-| Add comment | Submit comment | Comment displayed | Pass |
-| Responsive layout | Resize screen | Layout adapts | Pass |
+| Feature           | Action            | Expected Result      | Outcome |
+|-------------------|-------------------|----------------------|---------|
+| View posts        | Load homepage     | Posts are displayed | Pass    |
+| Create post       | Submit valid form | Post saved           | Pass    |
+| Create post       | Submit empty form | Error shown          | Pass    |
+| Edit post         | Update content    | Changes saved        | Pass    |
+| Delete post       | Confirm deletion  | Post removed         | Pass    |
+| Add comment       | Submit comment    | Comment displayed    | Pass    |
+| Responsive layout | Resize screen     | Layout adapts        | Pass    |
+
+### View posts – Homepage
+![Homepage](https://github.com/user-attachments/assets/d5fc3ec6-9b6d-4fe9-9957-f5389af48aaf)
+
+### Load homepage
+![Posts displayed](https://github.com/user-attachments/assets/51ce1009-4fb0-4eed-ba89-e3862d5dda7f)
 
 ### Validation Testing
 
