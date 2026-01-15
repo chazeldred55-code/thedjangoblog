@@ -71,17 +71,17 @@
                   <p class="text-warning">This comment is awaiting approval</p>
                 {% endif %}
 
-                {% if user.is_authenticated and comment.author == user %}
-                  <!-- Edit Button with comment_id attribute -->
-                  <button type="button" class="btn btn-edit btn-sm" comment_id="{{ comment.id }}">
-                    Edit
-                  </button>
+{% if user.is_authenticated and comment.author == user %}
+  <a href="{% url 'comment_edit' slug=post.slug comment_id=comment.id %}"
+     class="btn btn-edit btn-sm">
+    Edit
+  </a>
 
-                  <!-- Delete Button with comment_id attribute -->
-                  <button type="button" class="btn btn-delete btn-sm" comment_id="{{ comment.id }}">
-                    Delete
-                  </button>
-                {% endif %}
+  <a href="{% url 'comment_delete' slug=post.slug comment_id=comment.id %}"
+     class="btn btn-delete btn-sm">
+    Delete
+  </a>
+{% endif %}
               </div>
               {% empty %}
                 <p>No comments yet.</p>
