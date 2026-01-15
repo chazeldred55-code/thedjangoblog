@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+
+      <!-- Delete Comment Card -->
+      <div class="card mb-4">
+        <div class="card-body">
+
+          <h2>Delete Comment</h2>
+          <hr>
+
+          <p>
+            Are you sure you want to delete your comment on:
+            <strong>{{ post.title }}</strong>?
+          </p>
+
+          <div class="border rounded p-3 mb-3">
+            {{ comment.body|linebreaks }}
+          </div>
+
+          <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-lg">Yes, delete</button>
+            <a href="{% url 'post_detail' slug=post.slug %}" class="btn btn-secondary btn-lg ms-2">Cancel</a>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock content %}
