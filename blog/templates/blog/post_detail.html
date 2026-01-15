@@ -11,7 +11,7 @@
       <div class="card mb-4">
         <div class="card-body">
 
-{% if post.featured_image and post.featured_image.name != "default.jpg" %}
+{% if post.featured_image and "default.jpg" not in post.featured_image.name %}
   <div class="image-container mb-3">
     <img
       src="{{ post.featured_image.url }}"
