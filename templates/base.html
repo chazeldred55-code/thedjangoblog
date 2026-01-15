@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Code|Star{% endblock %}</title>
+    <title>{% block title %}Thedjangoblog{% endblock %}</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
@@ -21,11 +21,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
     <div class="container-fluid">
 
-        <a class="navbar-brand" href="{% url 'home' %}">
-            <span class="brand">c<span class="red-o">o</span>de<span class="thin">|star</span></span>
-        </a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        <a class="navbar-brand" href="{% url 'home' %}"  aria-label="The Django Blog home">
+    <span class="brand text-nowrap">The<span class="red-o">d</span>jango<span class="thin">blog</span></span>
+</a>
+ <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarMain" aria-controls="navbarMain"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
