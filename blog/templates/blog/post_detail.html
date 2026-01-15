@@ -11,12 +11,19 @@
       <div class="card mb-4">
         <div class="card-body">
 
-          <!-- Post Image -->
-          <div class="image-container mb-3">
-            <img src="{% static 'images/default.jpg' %}" class="img-fluid" alt="{{ post.title }}">
-          </div>
+{% if post.featured_image and post.featured_image.name != "default.jpg" %}
+  <div class="image-container mb-3">
+    <img
+      src="{{ post.featured_image.url }}"
+      class="img-fluid"
+      alt="{{ post.title }}"
+      onerror="this.onerror=null; this.src='{% static 'images/default.jpg' %}';"
+      loading="lazy"
+    >
+  </div>
+{% endif %}
 
-          <!-- Post Author -->
+ <!-- Post Author -->
           <p class="author mb-3">Author: {{ post.author }}</p>
 
           <!-- Post Title -->
