@@ -1,7 +1,7 @@
 # The Django Blog – Reddit-Style Forum Application
 
 ## Live Site
-*(Add deployment URL here once deployed – Heroku / Render)*
+https://thedjangoblog-5115dd98e142.herokuapp.com/blog/
 
 ## Repository
 https://github.com/chazeldred55-code/thedjangoblog
@@ -132,9 +132,13 @@ The application fully implements **Create, Read, Update, and Delete** operations
 
 ### Manual Testing
 
+
+
 | Feature | Action | Expected Result | Outcome |
 |------|------|------|------|
-| View posts | Load homepage | Posts displayed | Pass |
+| View posts <img width="1915" height="1017" alt="image" src="https://github.com/user-attachments/assets/d5fc3ec6-9b6d-4fe9-9957-f5389af48aaf" />
+ | Load homepage <img width="1918" height="1022" alt="image" src="https://github.com/user-attachments/assets/51ce1009-4fb0-4eed-ba89-e3862d5dda7f" />
+| Pass |
 | Create post | Submit valid form | Post saved | Pass |
 | Create post | Submit empty form | Error shown | Pass |
 | Edit post | Update content | Changes saved | Pass |
