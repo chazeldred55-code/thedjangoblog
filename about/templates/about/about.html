@@ -20,18 +20,30 @@
             {% endif %}
         </div>
 
-        <div class="col-12 col-md-8">
-            <h2>{{ about.title }}</h2>
-            {{ about.content|safe }}
-        </div>
+       <div class="col-12 col-md-8">
+  {% if about %}
+    <h2>{{ about.title }}</h2>
+    {{ about.content|safe }}
+  {% else %}
+    <h2>About</h2>
+    <p class="text-muted">
+      About content has not been added yet. Please create an About entry in the admin panel.
+    </p>
+  {% endif %}
+</div>
+
     </div>
 
     <!-- Updated on -->
-    <div class="row">
-        <div class="col text-end">
-            <p><em>Updated on: {{ about.updated_on }}</em></p>
-        </div>
-    </div>
+ <div class="row">
+  <div class="col text-end">
+    <p><em>
+      Updated on:
+      {% if about %}{{ about.updated_on|date:"F j, Y" }}{% else %}—{% endif %}
+    </em></p>
+  </div>
+</div>
+
 
     <!-- Collaborate section -->
     <div class="row justify-content-center">

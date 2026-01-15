@@ -1,43 +1,35 @@
-from django.shortcuts import render
+# about/views.py
+
 from django.contrib import messages
-from .models import About
+from django.shortcuts import redirect, render
+
 from .forms import CollaborateForm
+from .models import About
 
 
 def about_me(request):
     """
-    Renders the most recent information on the website author
-    and allows user collaboration requests.
-
-    Displays an individual instance of :model:`about.About`.
-
-    **Context**
-    ``about``
-        The most recent instance of :model:`about.About`.
-    ``collaborate_form``
-        An instance of :form:`about.CollaborateForm`.
-
-    **Template**
-    :template:`about/about.html`
+    Renders the About page and handles collaboration requests.
     """
+
+    about = About.objects.order_by("-updated_on").first()
 
     if request.method == "POST":
         collaborate_form = CollaborateForm(data=request.POST)
         if collaborate_form.is_valid():
             collaborate_form.save()
-            messages.add_message(
+            messages.success(
                 request,
-                messages.SUCCESS,
                 "Collaboration request received! I endeavour to respond within 2 working days."
             )
-
-    # Get the latest About content
-    about = About.objects.all().order_by('-updated_on').first()
-    collaborate_form = CollaborateForm()
+            return redirect("about")  # ensure your URL name is "about"
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        collaborate_form = CollaborateForm()
 
     context = {
         "about": about,
         "collaborate_form": collaborate_form,
     }
-
     return render(request, "about/about.html", context)
