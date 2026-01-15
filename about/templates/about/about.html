@@ -5,67 +5,78 @@
 {% block content %}
 <div class="container mt-5">
 
-    <!-- About content -->
-    <div class="row">
-        <div class="col-12 col-md-4 text-center">
-            {% if about.profile_image and "placeholder" in about.profile_image.url %}
-                <img src="{% static 'images/nobody.jpg' %}" width="75%"
-                     alt="placeholder image">
-            {% elif about.profile_image %}
-                <img src="{{ about.profile_image.url }}" width="75%"
-                     alt="{{ about.title }}">
-            {% else %}
-                <img src="{% static 'images/nobody.jpg' %}" width="75%"
-                     alt="placeholder image">
-            {% endif %}
-        </div>
+  <!-- About content -->
+  <div class="row">
 
-       <div class="col-12 col-md-8">
-  {% if about %}
-    <h2>{{ about.title }}</h2>
-    {{ about.content|safe }}
-  {% else %}
-    <h2>About</h2>
-    <p class="text-muted">
-      About content has not been added yet. Please create an About entry in the admin panel.
-    </p>
-  {% endif %}
-</div>
-
+    <!-- Profile image -->
+    <div class="col-12 col-md-4 text-center">
+      {% if about %}
+        {% if about.profile_image and "placeholder" in about.profile_image.url %}
+          <img src="{% static 'images/nobody.jpg' %}" width="75%" alt="placeholder image">
+        {% elif about.profile_image %}
+          <img
+            src="{{ about.profile_image.url }}"
+            width="75%"
+            alt="{{ about.title }}"
+            onerror="this.onerror=null; this.src='{% static 'images/nobody.jpg' %}';"
+            loading="lazy"
+          >
+        {% else %}
+          <img src="{% static 'images/nobody.jpg' %}" width="75%" alt="placeholder image">
+        {% endif %}
+      {% else %}
+        <img src="{% static 'images/nobody.jpg' %}" width="75%" alt="placeholder image">
+      {% endif %}
     </div>
 
-    <!-- Updated on -->
- <div class="row">
-  <div class="col text-end">
-    <p><em>
-      Updated on:
-      {% if about %}{{ about.updated_on|date:"F j, Y" }}{% else %}—{% endif %}
-    </em></p>
+    <!-- About text -->
+    <div class="col-12 col-md-8">
+      {% if about %}
+        <h2>{{ about.title }}</h2>
+        {{ about.content|safe }}
+      {% else %}
+        <h2>About</h2>
+        <p class="text-muted">
+          About content has not been added yet. Please create an About entry in the admin panel.
+        </p>
+      {% endif %}
+    </div>
+
   </div>
-</div>
 
-
-    <!-- Collaborate section -->
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-6 my-5">
-            <h2>Let's collaborate!</h2>
-            <p>
-                I believe in the power of shared knowledge and collective effort.
-                Whether you have a project in mind, wish to co-author an article,
-                or simply want to brainstorm some ideas,
-                I'm excited to hear from you. Fill out the form
-                and we can get the ball rolling!
-            </p>
-
-            <form method="post">
-                {% csrf_token %}
-                {{ collaborate_form|crispy }}
-                <button type="submit" class="btn btn-secondary">
-                    Submit
-                </button>
-            </form>
-        </div>
+  <!-- Updated on -->
+  <div class="row">
+    <div class="col text-end">
+      <p>
+        <em>
+          Updated on:
+          {% if about %}{{ about.updated_on|date:"F j, Y" }}{% else %}—{% endif %}
+        </em>
+      </p>
     </div>
+  </div>
+
+  <!-- Collaborate section -->
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6 my-5">
+      <h2>Let's collaborate!</h2>
+      <p>
+        I believe in the power of shared knowledge and collective effort.
+        Whether you have a project in mind, wish to co-author an article,
+        or simply want to brainstorm some ideas,
+        I'm excited to hear from you. Fill out the form
+        and we can get the ball rolling!
+      </p>
+
+      <form method="post">
+        {% csrf_token %}
+        {{ collaborate_form|crispy }}
+        <button type="submit" class="btn btn-secondary">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
 
 </div>
 {% endblock content %}
