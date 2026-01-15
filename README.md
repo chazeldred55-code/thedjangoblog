@@ -150,6 +150,26 @@ The application fully implements **Create, Read, Update, and Delete** operations
 ### Load homepage
 ![Posts displayed](https://github.com/user-attachments/assets/51ce1009-4fb0-4eed-ba89-e3862d5dda7f)
 
+## Add + Submit + Approve + Delete + Modify Comment 
+<img width="996" height="587" alt="image" src="https://github.com/user-attachments/assets/a03b9e20-1d6a-44ec-b443-33304b95525a" />
+
+<img width="1446" height="546" alt="image" src="https://github.com/user-attachments/assets/9a044cf5-7015-4d03-8e05-7779e88e3e36" />
+
+<img width="1132" height="633" alt="image" src="https://github.com/user-attachments/assets/69fcc3bf-56fd-40f2-9af4-967d246f050f" />
+
+<img width="1033" height="433" alt="image" src="https://github.com/user-attachments/assets/9c3a37cd-ffdc-4327-a256-918c33211eb4" />
+
+<img width="1541" height="767" alt="image" src="https://github.com/user-attachments/assets/08e184a3-d3fe-4779-ac2a-0a1f7ffd5ec6" />
+
+<img width="1183" height="672" alt="image" src="https://github.com/user-attachments/assets/073bc7ce-a89c-485d-ab31-91e618f92288" />
+
+<img width="1087" height="427" alt="image" src="https://github.com/user-attachments/assets/2862515f-c517-4c18-bf63-3ca00a709a6c" />
+
+<img width="1026" height="151" alt="image" src="https://github.com/user-attachments/assets/5e3146d1-1bb9-4259-b1af-2eb7d1fce68d" />
+
+
+
+
 ### Validation Testing
 
 - Required form fields enforced
