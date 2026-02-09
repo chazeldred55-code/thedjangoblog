@@ -14,21 +14,22 @@ https://github.com/chazeldred55-code/thedjangoblog
 
 ## Table of Contents
 
-1. [Project Overview](#1-project-overview)  
-2. [User Experience (UX)](#2-user-experience-ux)  
-3. [User Stories](#3-user-stories)  
-4. [Features](#4-features)  
-5. [CRUD Functionality](#5-crud-functionality)  
-6. [Data Model](#6-data-model)  
-7. [Screenshots](#7-screenshots)  
-8. [Responsive Design](#8-responsive-design)  
-9. [Technologies Used](#9-technologies-used)  
-10. [Testing](#10-testing)  
-11. [Bugs & Fixes](#11-bugs--fixes)  
-12. [Deployment](#12-deployment)  
-13. [Security & Defensive Programming](#13-security--defensive-programming)  
-14. [Future Improvements](#14-future-improvements)  
-15. [Credits](#15-credits)  
+1. [Project Overview](#1-project-overview)
+1.5. [WireFrame](#1.5-wire-frame) 
+3. [User Experience (UX)](#2-user-experience-ux)  
+4. [User Stories](#3-user-stories)  
+5. [Features](#4-features)  
+6. [CRUD Functionality](#5-crud-functionality)  
+7. [Data Model](#6-data-model)  
+8. [Screenshots](#7-screenshots)  
+9. [Responsive Design](#8-responsive-design)  
+10. [Technologies Used](#9-technologies-used)  
+11. [Testing](#10-testing)  
+12. [Bugs & Fixes](#11-bugs--fixes)  
+13. [Deployment](#12-deployment)  
+14. [Security & Defensive Programming](#13-security--defensive-programming)  
+15. [Future Improvements](#14-future-improvements)  
+16. [Credits](#15-credits)  
 
 
 ---
@@ -45,6 +46,30 @@ The Django Blog is a Reddit-style discussion platform where users can:
 
 The application uses Django’s Model-Template-View architecture and a relational database to store dynamic content.
 
+
+## 1.5. Wireframe
+
+## Wireframes
+
+Wireframes were created during the planning stage to define layout structure, content hierarchy, and user flow before development began.
+
+The design focused on:
+- Clear navigation
+- Logical content structure
+- Simple user interaction
+- Mobile-first responsive layout
+
+### Homepage Wireframe
+![Homepage Wireframe](docs/wireframes/home.png)
+
+### Post Detail Wireframe
+![Post Detail Wireframe](docs/wireframes/detail.png)
+
+### Create / Edit Form Wireframe
+![Form Wireframe](docs/wireframes/form.png)
+
+### Mobile Layout Wireframe
+![Mobile Wireframe](docs/wireframes/mobile.png)
 ---
 
 ## 2. User Experience (UX)
