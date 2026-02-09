@@ -242,7 +242,6 @@ No known outstanding issues.
 
 ### Local Setup
 
-```bash
 git clone https://github.com/chazeldred55-code/thedjangoblog.git
 cd thedjangoblog
 pip install -r requirements.txt
@@ -295,4 +294,3 @@ Planned enhancements to extend functionality and improve user experience:
 - Deployment configured for **Heroku**
 - Project inspired by discussion platforms such as Reddit
 - Screenshots hosted using GitHub user attachments
-
