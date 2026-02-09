@@ -15,7 +15,7 @@ https://github.com/chazeldred55-code/thedjangoblog
 ## Table of Contents
 
 1. [Project Overview](#1-project-overview)
-1.5. [WireFrame](#1.5-wire-frame) 
+2 [WireFrame](#2-wire-frame) 
 3. [User Experience (UX)](#2-user-experience-ux)  
 4. [User Stories](#3-user-stories)  
 5. [Features](#4-features)  
@@ -47,7 +47,7 @@ The Django Blog is a Reddit-style discussion platform where users can:
 The application uses Django’s Model-Template-View architecture and a relational database to store dynamic content.
 
 
-## 1.5. Wireframe
+## 2 Wireframe
 
 ## Wireframes
 
@@ -72,7 +72,7 @@ The design focused on:
 ![Mobile Wireframe](docs/wireframes/mobile.png)
 ---
 
-## 2. User Experience (UX)
+## 3. User Experience (UX)
 
 ### Design Goals
 - Simple and intuitive navigation  
@@ -88,7 +88,7 @@ The design focused on:
 
 ---
 
-## 3. User Stories
+## 4. User Stories
 
 ### Core Functionality
 - As a user, I want to view all posts so I can browse discussions.  
@@ -104,7 +104,7 @@ The design focused on:
 
 ---
 
-## 4. Features
+## 5. Features
 
 ### Implemented
 - View all posts  
@@ -127,7 +127,7 @@ The design focused on:
 
 ---
 
-## 5. CRUD Functionality
+## 6. CRUD Functionality
 
 | Operation | Description |
 |---|---|
@@ -140,7 +140,7 @@ All changes update the database immediately and reflect in the UI.
 
 ---
 
-## 6. Data Model
+## 7. Data Model
 
 ### Post
 - Title  
@@ -157,7 +157,7 @@ All changes update the database immediately and reflect in the UI.
 
 ---
 
-## 7. Screenshots
+## 8. Screenshots
 
 ### View Posts – Homepage
 ![Homepage](https://github.com/user-attachments/assets/d5fc3ec6-9b6d-4fe9-9957-f5389af48aaf)
@@ -195,7 +195,7 @@ All changes update the database immediately and reflect in the UI.
 
 ---
 
-## 8. Responsive Design
+## 9. Responsive Design
 
 ### Desktop
 ![Desktop view](https://github.com/user-attachments/assets/533872d2-40bc-4336-bec2-393a36ab9903)
@@ -210,7 +210,7 @@ The layout adapts across screen sizes to maintain usability and readability.
 
 ---
 
-## 9. Technologies Used
+## 10. Technologies Used
 
 ### Backend
 - Python  
@@ -230,7 +230,7 @@ The layout adapts across screen sizes to maintain usability and readability.
 
 ---
 
-## 10. Testing
+## 11. Testing
 
 ### Manual Testing
 
@@ -256,14 +256,14 @@ The layout adapts across screen sizes to maintain usability and readability.
 
 ---
 
-## 11. Bugs & Fixes
+## 12. Bugs & Fixes
 
 All bugs identified during development were resolved.  
 No known outstanding issues.
 
 ---
 
-## 12. Deployment
+## 13. Deployment
 
 ### Local Setup
 
@@ -273,7 +273,7 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 
-## 13. Security & Defensive Programming
+## 14. Security & Defensive Programming
 
 The application follows several defensive programming and security practices:
 
@@ -295,7 +295,7 @@ Future security improvements:
 
 ---
 
-## 14. Future Improvements
+## 15. Future Improvements
 
 Planned enhancements to extend functionality and improve user experience:
 
@@ -311,7 +311,7 @@ Planned enhancements to extend functionality and improve user experience:
 
 ---
 
-## 15. Credits
+## 16. Credits
 
 - Built with **Python** and **Django**
 - Frontend developed using **HTML5** and **CSS3**
