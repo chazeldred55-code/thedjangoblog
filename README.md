@@ -13,21 +13,23 @@ https://github.com/chazeldred55-code/thedjangoblog
 ---
 
 ## Table of Contents
-## 1. Project Overview  
-# 2. User Experience (UX)  
-# 3. User Stories  
-# 4. Features  
-# 5. CRUD Functionality  
-# 6. Data Model  
-# 7. Screenshots  
-# 8. Responsive Design  
-# 9. Technologies Used  
-# 10. Testing  
-# 11. Bugs & Fixes  
-# 12. Deployment  
-# 13. Security & Defensive Programming  
-# 14. Future Improvements  
-# 15. Credits  
+
+1. [Project Overview](#1-project-overview)  
+2. [User Experience (UX)](#2-user-experience-ux)  
+3. [User Stories](#3-user-stories)  
+4. [Features](#4-features)  
+5. [CRUD Functionality](#5-crud-functionality)  
+6. [Data Model](#6-data-model)  
+7. [Screenshots](#7-screenshots)  
+8. [Responsive Design](#8-responsive-design)  
+9. [Technologies Used](#9-technologies-used)  
+10. [Testing](#10-testing)  
+11. [Bugs & Fixes](#11-bugs--fixes)  
+12. [Deployment](#12-deployment)  
+13. [Security & Defensive Programming](#13-security--defensive-programming)  
+14. [Future Improvements](#14-future-improvements)  
+15. [Credits](#15-credits)  
+
 
 ---
 
