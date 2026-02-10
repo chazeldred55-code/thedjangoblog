@@ -7,6 +7,8 @@ A full-stack Django web application that allows users to create posts, view disc
 ## Live Site
 https://thedjangoblog-5115dd98e142.herokuapp.com/blog/
 
+### Open in Incognito mode
+
 ## Repository
 https://github.com/chazeldred55-code/thedjangoblog
 
