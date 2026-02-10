@@ -246,6 +246,14 @@ The layout adapts across screen sizes to maintain usability and readability.
 | Add comment | Appears on post | Pass |
 | Responsive layout | Adapts to screen | Pass |
 
+### Lighthouse Tested
+#### Desktop
+<img width="650" height="545" alt="image" src="https://github.com/user-attachments/assets/cd74274a-37aa-45d6-a414-5543177eb82c" />
+#### Mobile
+<img width="622" height="548" alt="image" src="https://github.com/user-attachments/assets/03a68314-69d7-4196-bd47-76039caefc19" />
+
+
+
 ### Validation
 - Django form validation enforced  
 - Required fields checked  
