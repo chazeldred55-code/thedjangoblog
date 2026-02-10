@@ -1,13 +1,16 @@
 import os
 from pathlib import Path
-from decouple import config
+
 import dj_database_url
+from decouple import config
+
 
 # ------------------------
 # Load env.py if present
 # ------------------------
 if os.path.isfile("env.py"):
     import env  # noqa
+
 
 # ------------------------
 # Paths
@@ -17,28 +20,36 @@ TEMPLATES_DIR = BASE_DIR / "templates"
 STATIC_DIR = BASE_DIR / "static"
 MEDIA_DIR = BASE_DIR / "media"
 
+
 # ------------------------
 # Security
 # ------------------------
 SECRET_KEY = config("SECRET_KEY")
+
 DEBUG = config("DEBUG", cast=bool, default=False)
+
 ALLOWED_HOSTS = [
     "thedjangoblog-5115dd98e142.herokuapp.com",
     ".herokuapp.com",
     "127.0.0.1",
     "localhost",
 ]
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+SECURE_PROXY_SSL_HEADER = (
+    "HTTP_X_FORWARDED_PROTO",
+    "https",
+)
+
 USE_X_FORWARDED_HOST = True
 APPEND_SLASH = True
 
-# CSRF trusted origins for Heroku
 CSRF_TRUSTED_ORIGINS = [
     "https://thedjangoblog-5115dd98e142.herokuapp.com",
 ]
 
+
 # ------------------------
-# Cloudinary Configuration (Media)
+# Cloudinary (Media)
 # ------------------------
 CLOUDINARY_STORAGE = {
     "CLOUD_NAME": config("CLOUDINARY_CLOUD_NAME"),
@@ -46,7 +57,10 @@ CLOUDINARY_STORAGE = {
     "API_SECRET": config("CLOUDINARY_API_SECRET"),
 }
 
-DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+DEFAULT_FILE_STORAGE = (
+    "cloudinary_storage.storage.MediaCloudinaryStorage"
+)
+
 
 # ------------------------
 # Applications
@@ -77,18 +91,22 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
+
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 ACCOUNT_EMAIL_VERIFICATION = "none"
+
 
 # ------------------------
 # Middleware
 # ------------------------
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # Heroku static
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -98,48 +116,70 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
 ]
 
+
 # ------------------------
 # URLs / WSGI
 # ------------------------
 ROOT_URLCONF = "thedjangoblog.urls"
 WSGI_APPLICATION = "thedjangoblog.wsgi.application"
 
+
 # ------------------------
 # Templates
 # ------------------------
 TEMPLATES = [
     {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "BACKEND": (
+            "django.template.backends.django.DjangoTemplates"
+        ),
         "DIRS": [TEMPLATES_DIR],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
-                "django.template.context_processors.debug",
-                "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
+                (
+                    "django.template.context_processors.debug"
+                ),
+                (
+                    "django.template.context_processors.request"
+                ),
+                (
+                    "django.contrib.auth.context_processors.auth"
+                ),
+                (
+                    "django.contrib.messages.context_processors.messages"
+                ),
             ],
         },
     },
 ]
 
+
 # ------------------------
-# Static files (CSS, JS, Images)
+# Static files
 # ------------------------
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"  # collectstatic destination
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    STATIC_DIR,
 ]
 
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": (
+            "django.core.files.storage.FileSystemStorage"
+        ),
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": (
+            "whitenoise.storage."
+            "CompressedManifestStaticFilesStorage"
+        ),
     },
 }
+
+
 # ------------------------
 # Database
 # ------------------------
@@ -160,15 +200,38 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
+
+
 # ------------------------
 # Password validation
 # ------------------------
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+    {
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "UserAttributeSimilarityValidator"
+        )
+    },
+    {
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "MinimumLengthValidator"
+        )
+    },
+    {
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "CommonPasswordValidator"
+        )
+    },
+    {
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "NumericPasswordValidator"
+        )
+    },
 ]
+
 
 # ------------------------
 # Internationalization
@@ -177,6 +240,7 @@ LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
+
 
 # ------------------------
 # Summernote
@@ -191,10 +255,12 @@ SUMMERNOTE_CONFIG = {
     },
 }
 
+
 # ------------------------
 # Default PK
 # ------------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 
 # ------------------------
 # Logging

@@ -1,5 +1,3 @@
-# about/views.py
-
 from django.contrib import messages
 from django.shortcuts import redirect, render
 
@@ -20,7 +18,10 @@ def about_me(request):
             collaborate_form.save()
             messages.success(
                 request,
-                "Collaboration request received! I endeavour to respond within 2 working days."
+                (
+                    "Collaboration request received! "
+                    "I endeavour to respond within 2 working days."
+                ),
             )
             return redirect("about")  # ensure your URL name is "about"
         else:
@@ -32,4 +33,5 @@ def about_me(request):
         "about": about,
         "collaborate_form": collaborate_form,
     }
+
     return render(request, "about/about.html", context)

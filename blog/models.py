@@ -1,12 +1,15 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+
 from cloudinary.models import CloudinaryField
+
 
 # ------------------------
 # Category model
 # ------------------------
 class Category(models.Model):
     """Subreddit-style categories for posts"""
+
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(blank=True)
 
@@ -31,12 +34,19 @@ class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="blog_posts"
+        User,
+        on_delete=models.CASCADE,
+        related_name="blog_posts",
     )
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name="posts"
+        Category,
+        on_delete=models.CASCADE,
+        related_name="posts",
     )
-    featured_image = CloudinaryField('image', default='placeholder')
+    featured_image = CloudinaryField(
+        "image",
+        default="placeholder",
+    )
     content = models.TextField()
     excerpt = models.TextField(blank=True)
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT)
@@ -57,17 +67,26 @@ class Post(models.Model):
 # ------------------------
 class Comment(models.Model):
     """Comment model for posts (supports threaded replies)"""
+
     post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name="comments"
+        Post,
+        on_delete=models.CASCADE,
+        related_name="comments",
     )
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="commenter"
+        User,
+        on_delete=models.CASCADE,
+        related_name="commenter",
     )
     body = models.TextField()
     approved = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
     parent = models.ForeignKey(
-        'self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies'
+        "self",
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name="replies",
     )
 
     class Meta:
@@ -84,17 +103,27 @@ class Comment(models.Model):
 # ------------------------
 class Vote(models.Model):
     """Vote model to track upvotes and downvotes"""
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='votes')
-    value = models.SmallIntegerField(choices=((1, 'Upvote'), (-1, 'Downvote')))
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name="votes",
+    )
+    value = models.SmallIntegerField(
+        choices=((1, "Upvote"), (-1, "Downvote")),
+    )
 
     class Meta:
-        unique_together = ('user', 'post')
+        unique_together = ("user", "post")
         verbose_name = "Vote"
         verbose_name_plural = "Votes"
 
     def __str__(self):
-        return f"{self.user} voted {self.value} on {self.post.title}"
+        return (
+            f"{self.user} voted {self.value} "
+            f"on {self.post.title}"
+        )
 
 
 # ------------------------
@@ -102,10 +131,11 @@ class Vote(models.Model):
 # ------------------------
 class Profile(models.Model):
     """User profile with avatar and bio"""
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar_url = models.CharField(
         max_length=255,
-        default="images/no-profile-photo.png"
+        default="images/no-profile-photo.png",
     )
     bio = models.TextField(blank=True)
 

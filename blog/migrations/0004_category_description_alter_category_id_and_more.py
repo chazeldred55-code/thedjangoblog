@@ -5,8 +5,9 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0003_merge_0002_alter_post_status_0002_create_category'),
-    ]
+    ("blog", "0002_alter_post_status"),
+]
+
 
     operations = [
         migrations.AddField(
