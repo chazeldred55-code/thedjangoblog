@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
+from django.contrib.auth import views as auth_views  # ✅ added
 
 urlpatterns = [
     # Home (named) + /home/ alias
@@ -34,7 +35,29 @@ urlpatterns = [
     path("about/", include("about.urls")),
     path("blog/", include("blog.urls")),
 
-    # Third-party apps
+    # 🔐 Password reset (Django built-in)
+    path(
+        "accounts/password_reset/",
+        auth_views.PasswordResetView.as_view(),
+        name="password_reset",
+    ),
+    path(
+        "accounts/password_reset/done/",
+        auth_views.PasswordResetDoneView.as_view(),
+        name="password_reset_done",
+    ),
+    path(
+        "accounts/reset/<uidb64>/<token>/",
+        auth_views.PasswordResetConfirmView.as_view(),
+        name="password_reset_confirm",
+    ),
+    path(
+        "accounts/reset/done/",
+        auth_views.PasswordResetCompleteView.as_view(),
+        name="password_reset_complete",
+    ),
+
+    # Third-party apps (keep AFTER custom overrides if needed)
     path("accounts/", include("allauth.urls")),
     path("summernote/", include("django_summernote.urls")),
 
