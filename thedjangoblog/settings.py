@@ -237,15 +237,12 @@ LOGGING = {
     },
 }
 
-
 # ------------------------
-# Email (HARD OVERRIDE - PRODUCTION SAFE)
+# Email (SendGrid - FINAL)
 # ------------------------
-EMAIL_BACKEND = config(
-    "EMAIL_BACKEND",
-    default="django.core.mail.backends.console.EmailBackend"
-)
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 
-# Safety fallback (guarantees no SMTP usage)
-if "smtp" in EMAIL_BACKEND:
-    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+SENDGRID_API_KEY = config("SENDGRID_API_KEY")
+
+DEFAULT_FROM_EMAIL = "chazeldred55@gmail.com"
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
