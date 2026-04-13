@@ -17,7 +17,7 @@ https://github.com/chazeldred55-code/thedjangoblog
 ## Table of Contents
 
 1. [Project Overview](#1-project-overview)
-2 [WireFrame](#2-wire-frame) 
+2. [WireFrame](#2-wire-frame) 
 3. [User Experience (UX)](#3-user-experience-ux)  
 4. [User Stories](#4-user-stories)  
 5. [Features](#5-features)  
