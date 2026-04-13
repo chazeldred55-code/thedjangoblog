@@ -66,7 +66,6 @@ DEFAULT_FILE_STORAGE = (
 # Applications
 # ------------------------
 INSTALLED_APPS = [
-    # Django
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -75,7 +74,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
 
-    # Third-party
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -85,7 +83,6 @@ INSTALLED_APPS = [
     "cloudinary",
     "cloudinary_storage",
 
-    # Local apps
     "about",
     "blog",
 ]
@@ -129,25 +126,15 @@ WSGI_APPLICATION = "thedjangoblog.wsgi.application"
 # ------------------------
 TEMPLATES = [
     {
-        "BACKEND": (
-            "django.template.backends.django.DjangoTemplates"
-        ),
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [TEMPLATES_DIR],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
-                (
-                    "django.template.context_processors.debug"
-                ),
-                (
-                    "django.template.context_processors.request"
-                ),
-                (
-                    "django.contrib.auth.context_processors.auth"
-                ),
-                (
-                    "django.contrib.messages.context_processors.messages"
-                ),
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
@@ -158,7 +145,6 @@ TEMPLATES = [
 # Static files
 # ------------------------
 STATIC_URL = "/static/"
-
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_DIRS = [
@@ -167,15 +153,10 @@ STATICFILES_DIRS = [
 
 STORAGES = {
     "default": {
-        "BACKEND": (
-            "django.core.files.storage.FileSystemStorage"
-        ),
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": (
-            "whitenoise.storage."
-            "CompressedManifestStaticFilesStorage"
-        ),
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
 
@@ -207,28 +188,16 @@ else:
 # ------------------------
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": (
-            "django.contrib.auth.password_validation."
-            "UserAttributeSimilarityValidator"
-        )
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
     },
     {
-        "NAME": (
-            "django.contrib.auth.password_validation."
-            "MinimumLengthValidator"
-        )
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"
     },
     {
-        "NAME": (
-            "django.contrib.auth.password_validation."
-            "CommonPasswordValidator"
-        )
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"
     },
     {
-        "NAME": (
-            "django.contrib.auth.password_validation."
-            "NumericPasswordValidator"
-        )
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"
     },
 ]
 
@@ -278,3 +247,9 @@ LOGGING = {
         "level": "ERROR",
     },
 }
+
+
+# ------------------------
+# Email (FIX)
+# ------------------------
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
