@@ -11,7 +11,6 @@ from decouple import config
 if os.path.isfile("env.py"):
     import env  # noqa
 
-
 # ------------------------
 # Paths
 # ------------------------
@@ -240,6 +239,13 @@ LOGGING = {
 
 
 # ------------------------
-# Email (FIXED)
+# Email (HARD OVERRIDE - PRODUCTION SAFE)
 # ------------------------
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = config(
+    "EMAIL_BACKEND",
+    default="django.core.mail.backends.console.EmailBackend"
+)
+
+# Safety fallback (guarantees no SMTP usage)
+if "smtp" in EMAIL_BACKEND:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
