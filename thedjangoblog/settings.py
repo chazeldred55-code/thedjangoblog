@@ -18,7 +18,6 @@ if os.path.isfile("env.py"):
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = BASE_DIR / "templates"
 STATIC_DIR = BASE_DIR / "static"
-MEDIA_DIR = BASE_DIR / "media"
 
 
 # ------------------------
@@ -35,31 +34,12 @@ ALLOWED_HOSTS = [
     "localhost",
 ]
 
-SECURE_PROXY_SSL_HEADER = (
-    "HTTP_X_FORWARDED_PROTO",
-    "https",
-)
-
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 USE_X_FORWARDED_HOST = True
-APPEND_SLASH = True
 
 CSRF_TRUSTED_ORIGINS = [
     "https://thedjangoblog-5115dd98e142.herokuapp.com",
 ]
-
-
-# ------------------------
-# Cloudinary (Media)
-# ------------------------
-CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": config("CLOUDINARY_CLOUD_NAME"),
-    "API_KEY": config("CLOUDINARY_API_KEY"),
-    "API_SECRET": config("CLOUDINARY_API_SECRET"),
-}
-
-DEFAULT_FILE_STORAGE = (
-    "cloudinary_storage.storage.MediaCloudinaryStorage"
-)
 
 
 # ------------------------
@@ -77,9 +57,11 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+
     "django_summernote",
     "crispy_forms",
     "crispy_bootstrap5",
+
     "cloudinary",
     "cloudinary_storage",
 
@@ -92,10 +74,10 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
-
-ACCOUNT_EMAIL_VERIFICATION = "none"
 
 
 # ------------------------
@@ -142,26 +124,6 @@ TEMPLATES = [
 
 
 # ------------------------
-# Static files
-# ------------------------
-STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
-STATICFILES_DIRS = [
-    STATIC_DIR,
-]
-
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
-
-
-# ------------------------
 # Database
 # ------------------------
 DATABASE_URL = config("DATABASE_URL", default="")
@@ -181,6 +143,34 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
+
+
+# ------------------------
+# Static files
+# ------------------------
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATICFILES_DIRS = [STATIC_DIR]
+
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+
+# ------------------------
+# Cloudinary
+# ------------------------
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": config("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": config("CLOUDINARY_API_KEY"),
+    "API_SECRET": config("CLOUDINARY_API_SECRET"),
+}
 
 
 # ------------------------
@@ -250,9 +240,6 @@ LOGGING = {
 
 
 # ------------------------
-# Email (FORCED FIX)
+# Email (FIXED)
 # ------------------------
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
-# Force override any Heroku / env interference
-os.environ["EMAIL_BACKEND"] = EMAIL_BACKEND
