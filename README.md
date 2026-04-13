@@ -182,6 +182,10 @@ All changes update the database immediately and reflect in the UI.
 
 **Modify Comment**  
 ![Modify comment](https://github.com/user-attachments/assets/9c3a37cd-ffdc-4327-a256-918c33211eb4)
+**Modify Comment as a User**
+<img width="1032" height="361" alt="image" src="https://github.com/user-attachments/assets/369d1f23-c0b0-4f39-b35d-2bbc5b9ca90d" />
+**Delete Comment as a User** 
+<img width="1085" height="423" alt="image" src="https://github.com/user-attachments/assets/8b0ca655-5048-4d29-8dea-1a1c18ea3c00" />
 
 **Delete Comment**  
 ![Delete comment](https://github.com/user-attachments/assets/08e184a3-d3fe-4779-ac2a-0a1f7ffd5ec6)
