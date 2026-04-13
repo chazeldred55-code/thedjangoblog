@@ -250,6 +250,9 @@ LOGGING = {
 
 
 # ------------------------
-# Email (FIX)
+# Email (FORCED FIX)
 # ------------------------
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# Force override any Heroku / env interference
+os.environ["EMAIL_BACKEND"] = EMAIL_BACKEND
