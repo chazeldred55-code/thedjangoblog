@@ -283,7 +283,42 @@ Result:
 (Screenshot below)
 <img width="938" height="72" alt="image" src="https://github.com/user-attachments/assets/6d4dd03e-4146-4a13-b91c-36a49c5cd465" />
 
+#### W3C HTML Validation
 
+All pages were validated using the W3C HTML Validator.
+
+| Page | Result |
+|------|--------|
+| Post List | No errors |
+| Post Detail | No errors |
+| Create/Edit | No errors |
+| Login/Register | No errors |
+
+(Screenshots below)
+
+#### CSS Validation
+
+CSS validated using W3C Jigsaw Validator.
+
+- No errors found
+
+(Screenshot below)
+
+https://validator.w3.org/
+
+<img width="1898" height="573" alt="image" src="https://github.com/user-attachments/assets/20180270-a38b-4ae8-8487-d824d8211c88" />
+
+
+https://jigsaw.w3.org/css-validator/
+
+## CSS Validation
+
+The CSS was validated using the W3C CSS Validator.
+
+Errors and warnings shown are related to Bootstrap 5.3, which is included via CDN. 
+These occur because the validator does not fully support modern CSS features such as variables and advanced selectors used by Bootstrap.
+
+All custom CSS written for this project validates successfully with no errors.
 
 
 ## 12. Bugs & Fixes
