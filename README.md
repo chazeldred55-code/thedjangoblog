@@ -305,9 +305,14 @@ CSS validated using W3C Jigsaw Validator.
 (Screenshot below)
 
 https://validator.w3.org/
-Home Page:
+Post List:
 <img width="1898" height="573" alt="image" src="https://github.com/user-attachments/assets/20180270-a38b-4ae8-8487-d824d8211c88" />
 
+Post Detail:
+<img width="1881" height="582" alt="image" src="https://github.com/user-attachments/assets/0c7d7e9b-cafc-4a0e-9a68-61a276a3dda7" />
+
+| Create/Edit |
+| Login/Register | 
 
 https://jigsaw.w3.org/css-validator/
 
