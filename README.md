@@ -305,7 +305,7 @@ CSS validated using W3C Jigsaw Validator.
 (Screenshot below)
 
 https://validator.w3.org/
-
+Home Page:
 <img width="1898" height="573" alt="image" src="https://github.com/user-attachments/assets/20180270-a38b-4ae8-8487-d824d8211c88" />
 
 
@@ -319,6 +319,7 @@ Errors and warnings shown are related to Bootstrap 5.3, which is included via CD
 These occur because the validator does not fully support modern CSS features such as variables and advanced selectors used by Bootstrap.
 
 All custom CSS written for this project validates successfully with no errors.
+<img width="1837" height="162" alt="image" src="https://github.com/user-attachments/assets/38b010fe-39bf-4486-bf55-9c04e7748fa1" />
 
 
 ## 12. Bugs & Fixes
