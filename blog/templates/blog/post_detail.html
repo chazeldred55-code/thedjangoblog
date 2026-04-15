@@ -11,46 +11,50 @@
       <div class="card mb-4">
         <div class="card-body">
 
-{% if post.featured_image and "default.jpg" not in post.featured_image.name %}
-  <div class="image-container mb-3">
-    <img
-      src="{{ post.featured_image.url }}"
-      class="img-fluid"
-      alt="{{ post.title }}"
-      onerror="this.onerror=null; this.src='{% static 'images/default.jpg' %}';"
-      loading="lazy"
-    >
-  </div>
-{% endif %}
+          {% if post.featured_image and "default.jpg" not in post.featured_image.name %}
+          <div class="image-container mb-3">
+            <img
+              src="{{ post.featured_image.url }}"
+              class="img-fluid"
+              alt="{{ post.title }}"
+              onerror="this.onerror=null; this.src='{% static 'images/default.jpg' %}';"
+              loading="lazy">
+          </div>
+          {% endif %}
 
- <!-- Post Author -->
+          <!-- Post Author -->
           <p class="author mb-3">Author: {{ post.author }}</p>
 
           <!-- Post Title -->
           <h1 class="card-title">{{ post.title }}</h1>
 
           <!-- Post Metadata -->
-          <p class="text-muted">Published on {{ post.created_on|date:"F j, Y" }}</p>
+          <p class="text-muted">
+            Published on {{ post.created_on|date:"F j, Y" }}
+          </p>
           <hr>
 
           <!-- Post Content -->
-          <div class="card-text">{{ post.content|safe }}</div>
+          <div class="card-text">
+            {{ post.content|safe }}
+          </div>
           <hr>
 
           <!-- Comment Count -->
           <div class="row">
             <div class="col-12">
-              <strong class="text-secondary">
-                <i class="far fa-comments"></i> {{ comment_count }}
+              <strong class="text-secondary" aria-label="Number of comments">
+                <i class="far fa-comments" aria-hidden="true"></i> {{ comment_count }}
               </strong>
             </div>
           </div>
+
           <hr>
 
           <!-- Comments Section -->
-          <div class="card mb-4 mt-3">
+          <section class="card mb-4 mt-3">
             <div class="card-body">
-              <h3>Comments:</h3>
+              <h2>Comments</h2>
 
               {% for comment in comments %}
               <div class="p-2 comment
@@ -58,10 +62,12 @@
                   {% elif not comment.approved %} d-none
                   {% endif %}">
 
-                <p class="font-weight-bold">
+                <h3 class="font-weight-bold">
                   {{ comment.author }}
-                  <span class="font-weight-normal">{{ comment.created_on|date:"F j, Y, g:i a" }}</span> wrote:
-                </p>
+                  <span class="font-weight-normal">
+                    {{ comment.created_on|date:"F j, Y, g:i a" }}
+                  </span>
+                </h3>
 
                 <div id="comment{{ comment.id }}">
                   {{ comment.body|linebreaks }}
@@ -71,44 +77,52 @@
                   <p class="text-warning">This comment is awaiting approval</p>
                 {% endif %}
 
-{% if user.is_authenticated and comment.author == user %}
-  <a href="{% url 'comment_edit' slug=post.slug comment_id=comment.id %}"
-     class="btn btn-edit btn-sm">
-    Edit
-  </a>
+                {% if user.is_authenticated and comment.author == user %}
+                  <a href="{% url 'comment_edit' slug=post.slug comment_id=comment.id %}"
+                     class="btn btn-edit btn-sm">
+                    Edit
+                  </a>
 
-  <a href="{% url 'comment_delete' slug=post.slug comment_id=comment.id %}"
-     class="btn btn-delete btn-sm">
-    Delete
-  </a>
-{% endif %}
+                  <a href="{% url 'comment_delete' slug=post.slug comment_id=comment.id %}"
+                     class="btn btn-delete btn-sm">
+                    Delete
+                  </a>
+                {% endif %}
               </div>
               {% empty %}
                 <p>No comments yet.</p>
               {% endfor %}
             </div>
-          </div>
+          </section>
 
           <!-- New Comment Form -->
-          <div class="card mb-4 mt-3">
+          <section class="card mb-4 mt-3">
             <div class="card-body">
+              <h2>Leave a comment</h2>
+
               {% if user.is_authenticated %}
-                <h3>Leave a comment:</h3>
                 <p>Posting as: {{ user.username }}</p>
+
                 <form method="post" id="commentForm" action="{% url 'post_detail' slug=post.slug %}">
                   {% csrf_token %}
                   {{ comment_form|crispy }}
-                  <button type="submit" class="btn btn-signup btn-lg mt-2">Submit</button>
+
+                  <button type="submit" class="btn btn-signup btn-lg mt-2">
+                    Submit
+                  </button>
                 </form>
               {% else %}
-                <p><a href="{% url 'account_login' %}">Log in</a> to leave a comment.</p>
+                <p>
+                  <a href="{% url 'account_login' %}">Log in</a> to leave a comment.
+                </p>
               {% endif %}
             </div>
-          </div>
+          </section>
 
           <!-- Back Button -->
-         <a href="{% url 'blog_home' %}" class="btn btn-signup mt-3">… Back to Blog</a>
-
+          <a href="{% url 'blog_home' %}" class="btn btn-signup mt-3">
+            Back to Blog
+          </a>
 
         </div>
       </div>
@@ -117,4 +131,3 @@
   </div>
 </div>
 {% endblock content %}
-
