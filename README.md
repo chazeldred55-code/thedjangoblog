@@ -22,8 +22,7 @@ https://github.com/chazeldred55-code/thedjangoblog
 4. [User Stories](#4-user-stories)  
 5. [Features](#5-features)  
 6. [CRUD Functionality](#6-crud-functionality)  
-7. [Data Model](#7-data-model)  
-8. [Screenshots](#8-screenshots)  
+7. [Data Model](#7-data-model)    
 9. [Responsive Design](#9-responsive-design)  
 10. [Technologies Used](#10-technologies-used)  
 11. [Testing](#11-testing)  
@@ -159,7 +158,7 @@ All changes update the database immediately and reflect in the UI.
 
 ---
 
-## 8. Screenshots
+### 8. Screenshots
 
 ### View Posts – Homepage
 ![Homepage](https://github.com/user-attachments/assets/d5fc3ec6-9b6d-4fe9-9957-f5389af48aaf)
@@ -182,6 +181,10 @@ All changes update the database immediately and reflect in the UI.
 
 **Modify Comment**  
 ![Modify comment](https://github.com/user-attachments/assets/9c3a37cd-ffdc-4327-a256-918c33211eb4)
+**Modify Comment as a User**
+<img width="1032" height="361" alt="image" src="https://github.com/user-attachments/assets/369d1f23-c0b0-4f39-b35d-2bbc5b9ca90d" />
+**Delete Comment as a User** 
+<img width="1085" height="423" alt="image" src="https://github.com/user-attachments/assets/8b0ca655-5048-4d29-8dea-1a1c18ea3c00" />
 
 **Delete Comment**  
 ![Delete comment](https://github.com/user-attachments/assets/08e184a3-d3fe-4779-ac2a-0a1f7ffd5ec6)
@@ -263,8 +266,25 @@ The layout adapts across screen sizes to maintain usability and readability.
 - Python: PEP8 compliant  
 - HTML: W3C validated  
 - CSS: Jigsaw validated  
+### Code Validation
 
----
+#### PEP8 Compliance (Python)
+
+All Python code was validated using `pycodestyle`.
+
+Command used:
+pycodestyle . --exclude=.venv,migrations,__pycache__
+
+This ensures only custom project files were checked, excluding third-party libraries and auto-generated Django files.
+
+Result:
+- No errors or warnings found
+
+(Screenshot below)
+<img width="938" height="72" alt="image" src="https://github.com/user-attachments/assets/6d4dd03e-4146-4a13-b91c-36a49c5cd465" />
+
+
+
 
 ## 12. Bugs & Fixes
 
@@ -329,3 +349,4 @@ Planned enhancements to extend functionality and improve user experience:
 - Deployment configured for **Heroku**
 - Project inspired by discussion platforms such as Reddit
 - Screenshots hosted using GitHub user attachments
+
