@@ -1,4 +1,12 @@
 /* -----------------------------
+   Root variables (maintainability)
+----------------------------- */
+:root {
+    --brand-color: #188181;
+    --brand-color-dark: #0f6161;
+}
+
+/* -----------------------------
    Image container & author badge
 ----------------------------- */
 .image-container {
@@ -27,7 +35,7 @@
     bottom: 5px;
     left: 0;
     background-color: rgba(24, 129, 129, 0.85);
-    color: white;
+    color: #fff;
     padding: 3px 8px;
     font-size: 0.8rem;
     font-weight: bold;
@@ -45,7 +53,7 @@
 
 .post-link:hover h2,
 .post-link:hover p {
-    color: #188181; /* matches your brand color */
+    color: var(--brand-color);
 }
 
 /* -----------------------------
@@ -64,8 +72,8 @@
    Buttons
 ----------------------------- */
 .btn-signup {
-    background-color: #188181;
-    color: white;
+    background-color: var(--brand-color);
+    color: #fff;
     border: none;
     border-radius: 5px;
     padding: 0.5rem 1rem;
@@ -73,8 +81,8 @@
 }
 
 .btn-signup:hover {
-    background-color: #0f6161;
-    color: white;
+    background-color: var(--brand-color-dark);
+    color: #fff;
 }
 
 /* -----------------------------
@@ -109,6 +117,7 @@
         font-size: 0.9rem;
     }
 }
+
 /* -------------------------
    Navbar styling (brand-aligned)
 -------------------------- */
@@ -135,13 +144,13 @@
 }
 
 .navbar .nav-link:hover {
-    background-color: rgba(24, 129, 129, 0.10); /* brand teal tint */
-    color: #188181;
+    background-color: rgba(24, 129, 129, 0.10);
+    color: var(--brand-color);
 }
 
 .navbar .nav-link.active {
-    background-color: rgba(24, 129, 129, 0.16); /* stronger brand tint */
-    color: #188181;
+    background-color: rgba(24, 129, 129, 0.16);
+    color: var(--brand-color);
 }
 
 /* Improve keyboard focus visibility */
@@ -165,7 +174,7 @@
 }
 
 .navbar .dropdown-item:active {
-    background-color: #188181;
+    background-color: var(--brand-color);
     color: #fff;
 }
 
