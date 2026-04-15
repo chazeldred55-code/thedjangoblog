@@ -22,8 +22,7 @@ https://github.com/chazeldred55-code/thedjangoblog
 4. [User Stories](#4-user-stories)  
 5. [Features](#5-features)  
 6. [CRUD Functionality](#6-crud-functionality)  
-7. [Data Model](#7-data-model)  
-8. [Screenshots](#8-screenshots)  
+7. [Data Model](#7-data-model)    
 9. [Responsive Design](#9-responsive-design)  
 10. [Technologies Used](#10-technologies-used)  
 11. [Testing](#11-testing)  
@@ -159,7 +158,7 @@ All changes update the database immediately and reflect in the UI.
 
 ---
 
-## 8. Screenshots
+### 8. Screenshots
 
 ### View Posts – Homepage
 ![Homepage](https://github.com/user-attachments/assets/d5fc3ec6-9b6d-4fe9-9957-f5389af48aaf)
@@ -267,8 +266,25 @@ The layout adapts across screen sizes to maintain usability and readability.
 - Python: PEP8 compliant  
 - HTML: W3C validated  
 - CSS: Jigsaw validated  
+### Code Validation
 
----
+#### PEP8 Compliance (Python)
+
+All Python code was validated using `pycodestyle`.
+
+Command used:
+pycodestyle . --exclude=.venv,migrations,__pycache__
+
+This ensures only custom project files were checked, excluding third-party libraries and auto-generated Django files.
+
+Result:
+- No errors or warnings found
+
+(Screenshot below)
+<img width="938" height="72" alt="image" src="https://github.com/user-attachments/assets/6d4dd03e-4146-4a13-b91c-36a49c5cd465" />
+
+
+
 
 ## 12. Bugs & Fixes
 
@@ -333,3 +349,4 @@ Planned enhancements to extend functionality and improve user experience:
 - Deployment configured for **Heroku**
 - Project inspired by discussion platforms such as Reddit
 - Screenshots hosted using GitHub user attachments
+
