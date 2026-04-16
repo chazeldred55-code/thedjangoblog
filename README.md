@@ -415,14 +415,13 @@ All identified bugs were resolved through systematic testing, debugging, and ite
 
 To run the project locally:
 
-
+```
 git clone https://github.com/chazeldred55-code/thedjangoblog.git
-
 cd thedjangoblog
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
-
+```
 
 ---
 
@@ -441,15 +440,15 @@ The application was deployed using Heroku with the following steps:
 5. Deploy the main branch  
 6. Run migrations:
 
-
+```
 heroku run python manage.py migrate
-
+```
 
 7. Collect static files:
 
-
+```
 heroku run python manage.py collectstatic
-
+```
 
 8. Open the deployed application  
 
@@ -457,15 +456,13 @@ heroku run python manage.py collectstatic
 
 ### PostgreSQL Database (Production)
 
-In development, the project uses SQLite as the default database due to its simplicity and zero configuration requirements.
+In development, the project uses SQLite as the default database due to its simplicity.
 
-For production deployment, the application uses PostgreSQL, provisioned via Heroku’s managed database service.
+In production, PostgreSQL is used via Heroku.
 
-PostgreSQL is used in production because it is more robust, scalable, and suitable for handling concurrent users compared to SQLite.
+The application switches automatically using the `DATABASE_URL` environment variable and `dj-database-url`.
 
-The application is configured to switch between SQLite and PostgreSQL dynamically using the DATABASE_URL environment variable and the dj-database-url package.
-
-In `settings.py`, this is handled with conditional logic:
+In `settings.py`:
 
 ```python
 DATABASE_URL = config("DATABASE_URL", default="")
@@ -485,63 +482,69 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
+```
 
 This ensures:
+- SQLite is used locally  
+- PostgreSQL is used in production  
 
-SQLite is used locally
-PostgreSQL is used automatically in production
-Environment Variables
+---
 
-Sensitive data is stored securely using environment variables.
+### Environment Variables
 
-A .env file is used locally and is excluded from version control via .gitignore.
+Sensitive data is stored using environment variables.
 
-Example .env structure:
+A `.env` file is used locally and excluded via `.gitignore`.
 
+Example:
+
+```
 SECRET_KEY=your_secret_key
 DEBUG=True
 DATABASE_URL=your_database_url
 CLOUDINARY_URL=your_cloudinary_url
 SENDGRID_API_KEY=your_sendgrid_key
+```
 
-In production, these values are stored as Heroku Config Vars and are not exposed in the repository.
+---
 
-14. Security & Defensive Programming
+## 14. Security & Defensive Programming
 
-The application follows several defensive programming and security practices:
+- Environment variables protect sensitive data  
+- `.env` is not committed to the repository  
+- DEBUG is False in production  
+- CSRF protection is enabled  
+- Django form validation is enforced  
+- Error handling prevents crashes  
+- Users receive feedback messages  
+- Delete confirmations prevent mistakes  
 
-Environment variables are used to store sensitive data (SECRET_KEY, DATABASE_URL, API keys)
-.env file is excluded from version control to prevent credential exposure
-DEBUG is set to False in production
-CSRF protection is enabled for all POST requests
-Django form validation ensures all user inputs are validated
-Error handling prevents application crashes and improves stability
-User feedback messages provide clear responses to user actions
-Delete confirmation prompts prevent accidental data loss
-Access Control
-Authenticated users are required to create, edit, and delete content
-Users can only modify their own posts and comments
-Future Security Improvements
-Enhanced permission controls
-Role-based access (admin/moderator)
-Additional input sanitisation
-15. Future Improvements
+### Access Control
 
-Planned enhancements to extend functionality and improve user experience:
+- Only logged-in users can create/edit/delete  
+- Users can only modify their own content  
 
-User authentication (login, logout, registration)
-User profiles
-Restrict editing and deleting to the post/comment author
-Categories or tags for posts
-Search and filtering functionality
-Pagination for large numbers of posts
-Rich text or Markdown editor
-Comment moderation tools
-Post voting system (upvote/downvote)
-16. Credits
-Built with Python and Django
-Frontend developed using HTML5 and CSS3
-Version control and project hosting via GitHub
-Deployment configured for Heroku
-Project inspired by discussion platforms such as Reddit
+---
+
+## 15. Future Improvements
+
+- User authentication enhancements  
+- User profiles  
+- Permissions for content ownership  
+- Categories/tags  
+- Search functionality  
+- Pagination  
+- Rich text editor  
+- Comment moderation  
+- Voting system  
+
+---
+
+## 16. Credits
+
+- Built with **Python** and **Django**  
+- HTML5 and CSS3 frontend  
+- GitHub for version control  
+- Heroku deployment  
+- Inspired by Reddit-style platforms  
 Screenshots hosted using GitHub user attachments
