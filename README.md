@@ -296,14 +296,6 @@ All pages were validated using the W3C HTML Validator.
 | Create/Edit | No errors |
 | Login/Register | No errors |
 
-(Screenshots below)
-
-#### CSS Validation
-
-CSS validated using W3C Jigsaw Validator.
-
-- No errors found
-
 (Screenshot below)
 
 https://validator.w3.org/
@@ -313,8 +305,14 @@ Post List:
 Post Detail:
 <img width="1881" height="582" alt="image" src="https://github.com/user-attachments/assets/0c7d7e9b-cafc-4a0e-9a68-61a276a3dda7" />
 
-| Create/Edit |
-| Login/Register | 
+Edit / Delete Comment:
+<img width="1917" height="645" alt="image" src="https://github.com/user-attachments/assets/0e9d1fe3-15c9-4845-a5c8-01bbc33add96" />
+
+Login: 
+<img width="1833" height="542" alt="image" src="https://github.com/user-attachments/assets/e59f7274-d727-4593-9171-0b5bf674ea86" />
+Sign up:
+<img width="1862" height="576" alt="image" src="https://github.com/user-attachments/assets/7a83aaf4-880f-45b4-9be5-45986f9fba1d" />
+
 
 https://jigsaw.w3.org/css-validator/
 
