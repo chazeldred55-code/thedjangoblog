@@ -12,20 +12,11 @@ def **init**(self, *args, **kwargs):
 super().**init**(*args, **kwargs)
 
 ```
-    # Override widgets to remove aria-describedby
     if 'password1' in self.fields:
-        self.fields['password1'].widget = forms.PasswordInput(
-            attrs={
-                'placeholder': 'Password',
-                'autocomplete': 'new-password',
-            }
-        )
+        self.fields['password1'].help_text = ""
+        self.fields['password1'].widget.attrs.pop('aria-describedby', None)
 
     if 'password2' in self.fields:
-        self.fields['password2'].widget = forms.PasswordInput(
-            attrs={
-                'placeholder': 'Confirm Password',
-                'autocomplete': 'new-password',
-            }
-        )
+        self.fields['password2'].help_text = ""
+        self.fields['password2'].widget.attrs.pop('aria-describedby', None)
 ```
