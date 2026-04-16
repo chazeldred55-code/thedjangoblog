@@ -441,11 +441,15 @@ The application was deployed using Heroku with the following steps:
 5. Deploy the main branch  
 6. Run migrations:
 
+
 heroku run python manage.py migrate
+
 
 7. Collect static files:
 
+
 heroku run python manage.py collectstatic
+
 
 8. Open the deployed application  
 
@@ -461,7 +465,7 @@ PostgreSQL is used in production because it is more robust, scalable, and suitab
 
 The application is configured to switch between SQLite and PostgreSQL dynamically using the DATABASE_URL environment variable and the dj-database-url package.
 
-In settings.py, this is handled with conditional logic:
+In `settings.py`, this is handled with conditional logic:
 
 ```python
 DATABASE_URL = config("DATABASE_URL", default="")
@@ -502,28 +506,42 @@ SENDGRID_API_KEY=your_sendgrid_key
 
 In production, these values are stored as Heroku Config Vars and are not exposed in the repository.
 
-## 14. Future Improvements
+14. Security & Defensive Programming
+
+The application follows several defensive programming and security practices:
+
+Environment variables are used to store sensitive data (SECRET_KEY, DATABASE_URL, API keys)
+.env file is excluded from version control to prevent credential exposure
+DEBUG is set to False in production
+CSRF protection is enabled for all POST requests
+Django form validation ensures all user inputs are validated
+Error handling prevents application crashes and improves stability
+User feedback messages provide clear responses to user actions
+Delete confirmation prompts prevent accidental data loss
+Access Control
+Authenticated users are required to create, edit, and delete content
+Users can only modify their own posts and comments
+Future Security Improvements
+Enhanced permission controls
+Role-based access (admin/moderator)
+Additional input sanitisation
+15. Future Improvements
 
 Planned enhancements to extend functionality and improve user experience:
 
-- User authentication (login, logout, registration)
-- User profiles
-- Restrict editing and deleting to the post/comment author
-- Categories or tags for posts
-- Search and filtering functionality
-- Pagination for large numbers of posts
-- Rich text or Markdown editor
-- Comment moderation tools
-- Post voting system (upvote/downvote)
-
----
-
-## 16. Credits
-
-- Built with **Python** and **Django**
-- Frontend developed using **HTML5** and **CSS3**
-- Version control and project hosting via **GitHub**
-- Deployment configured for **Heroku**
-- Project inspired by discussion platforms such as Reddit
-- Screenshots hosted using GitHub user attachments
-
+User authentication (login, logout, registration)
+User profiles
+Restrict editing and deleting to the post/comment author
+Categories or tags for posts
+Search and filtering functionality
+Pagination for large numbers of posts
+Rich text or Markdown editor
+Comment moderation tools
+Post voting system (upvote/downvote)
+16. Credits
+Built with Python and Django
+Frontend developed using HTML5 and CSS3
+Version control and project hosting via GitHub
+Deployment configured for Heroku
+Project inspired by discussion platforms such as Reddit
+Screenshots hosted using GitHub user attachments
