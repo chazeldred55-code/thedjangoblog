@@ -268,7 +268,7 @@ LOGGING = {
 # ------------------------
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 
-SENDGRID_API_KEY = config("SENDGRID_API_KEY")
+SENDGRID_API_KEY = config("SENDGRID_API_KEY", default="")
 
 DEFAULT_FROM_EMAIL = "chazeldred55@gmail.com"
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
