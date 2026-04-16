@@ -78,6 +78,10 @@ LOGOUT_REDIRECT_URL = "/"
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
+ACCOUNT_FORMS = {
+    'signup': 'blog.forms.CustomSignupForm',
+}
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
