@@ -390,10 +390,24 @@ All custom CSS written for this project validates successfully with no errors.
 
 ## 12. Bugs & Fixes
 
-All bugs identified during development were resolved.  
-No known outstanding issues.
+## 12. Bugs & Fixes
 
----
+During development, several issues were encountered and resolved. These are documented below to demonstrate the debugging and problem-solving process.
+
+| Bug Description | Where Found | Root Cause | Fix Applied |
+|----------------|------------|-----------|------------|
+| Comments could be submitted without login | Testing | No authentication check on comment submission view | Added login restriction to ensure only authenticated users can submit comments |
+| HTML validation errors on forms | Validation phase | Incorrect HTML structure and missing attributes | Fixed template structure and corrected invalid attributes |
+| CSS layout breaking on mobile devices | Manual testing | Fixed-width elements and lack of responsive design | Implemented responsive CSS and Bootstrap grid system |
+| Migration errors during development | Development | Changes to models after initial migrations | Re-ran migrations and ensured models and database schema were in sync |
+| Deployment error on Heroku | Deployment | Missing or incorrect environment variables (e.g. DATABASE_URL) | Configured Heroku Config Vars correctly and redeployed application |
+| Duplicate voting issue | Testing | No constraint preventing multiple votes per user | Added `unique_together` constraint in Vote model |
+| Images not displaying correctly | Testing | Incorrect Cloudinary configuration | Fixed Cloudinary settings and ensured proper media handling |
+| URL routing errors (404 pages) | Development | Incorrect URL patterns or missing routes | Updated urls.py and ensured all routes were correctly defined |
+
+### Summary
+
+All identified bugs were resolved through systematic testing, debugging, and iterative improvements. No critical issues remain that affect core functionality.
 
 ## 13. Deployment
 
