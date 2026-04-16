@@ -229,7 +229,7 @@ The layout adapts across screen sizes to maintain usability and readability.
 
 ### Database
 - SQLite (development)  
-
+- PostgreSQL (production via Heroku)
 ### Tools
 - Git  
 - GitHub  
@@ -343,6 +343,33 @@ cd thedjangoblog
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
+
+## 13. Deployment
+
+### Heroku Deployment
+
+(keep your existing steps here)
+
+---
+
+### PostgreSQL Database (Production)
+
+In development, the project uses SQLite as the default database due to its simplicity and zero configuration requirements.
+
+For production deployment, the application uses PostgreSQL, provisioned via Heroku’s managed database service.
+
+PostgreSQL is used in production because it is more robust, scalable, and suitable for handling concurrent users compared to SQLite.
+
+Django is configured to switch between SQLite and PostgreSQL using the `dj-database-url` package. This allows the application to automatically parse the `DATABASE_URL` environment variable provided by Heroku.
+
+Example configuration in `settings.py`:
+
+```python
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+}
 
 ## 14. Security & Defensive Programming
 
