@@ -169,6 +169,8 @@ All changes update the database immediately and reflect in the UI.
 ---
 
 ### Comment Workflow
+**cant comment without loggin in**
+<img width="1893" height="825" alt="image" src="https://github.com/user-attachments/assets/6a6f5f36-8b5d-48e7-9136-b4a5888a2be7" />
 
 **Add Comment**  
 ![Add comment](https://github.com/user-attachments/assets/a03b9e20-1d6a-44ec-b443-33304b95525a)
