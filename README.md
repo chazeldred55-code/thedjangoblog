@@ -142,19 +142,80 @@ All changes update the database immediately and reflect in the UI.
 ---
 
 ## 7. Data Model
+[ERD Diagram]
+<img width="238" height="370" alt="image" src="https://github.com/user-attachments/assets/342510d5-b4e7-4294-a82d-2d95c2f81dcb" />
+The ERD above illustrates the relationships between models. Field types and constraints are detailed in the sections below.
+Category
 
-### Post
-- Title  
-- Content  
-- Author  
-- Created date  
+The Category model is used to organise posts into groups.
 
-### Comment
-- Linked to Post (ForeignKey)  
-- Content  
-- Created date  
+name — CharField (max_length=100, unique=True)
+description — TextField (blank=True)
 
-**Relationship:** One Post → Many Comments
+A Category can contain multiple Posts (One-to-Many).
+
+Post
+
+The Post model represents user-created content.
+
+title — CharField (max_length=200, unique=True)
+slug — SlugField (unique=True)
+author — ForeignKey to User (on_delete=CASCADE)
+category — ForeignKey to Category
+featured_image — CloudinaryField (default placeholder)
+content — TextField
+excerpt — TextField (blank=True)
+status — IntegerField (Draft=0, Published=1)
+created_on — DateTimeField (auto_now_add=True)
+updated_on — DateTimeField (auto_now=True)
+
+Each Post belongs to one Category and one User, and can have many Comments and Votes.
+
+Comment
+
+The Comment model enables user interaction and threaded replies.
+
+post — ForeignKey to Post
+author — ForeignKey to User
+body — TextField
+approved — BooleanField (default=False)
+created_on — DateTimeField (auto_now_add=True)
+parent — ForeignKey to self (null=True, blank=True)
+
+This supports:
+
+Post → Comments (One-to-Many)
+Comment → Replies (self-referencing)
+Vote
+
+The Vote model tracks upvotes and downvotes.
+
+user — ForeignKey to User
+post — ForeignKey to Post
+value — SmallIntegerField (1 = upvote, -1 = downvote)
+
+Constraint:
+
+A user can only vote once per post (unique_together)
+Profile
+
+The Profile model extends the User model.
+
+user — OneToOneField to User
+avatar_url — CharField (max_length=255, default image path)
+bio — TextField (blank=True)
+
+Each User has exactly one Profile.
+
+Relationships Summary
+User → Post (One-to-Many)
+User → Comment (One-to-Many)
+User → Vote (One-to-Many)
+User → Profile (One-to-One)
+Category → Post (One-to-Many)
+Post → Comment (One-to-Many)
+Post → Vote (One-to-Many)
+Comment → Comment (threaded replies)
 
 ---
 
