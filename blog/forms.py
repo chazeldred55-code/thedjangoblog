@@ -12,7 +12,7 @@ def **init**(self, *args, **kwargs):
 super().**init**(*args, **kwargs)
 
 ```
-    # Force override widgets to remove aria-describedby AFTER allauth processing
+    # Override widgets to remove aria-describedby
     if 'password1' in self.fields:
         self.fields['password1'].widget = forms.PasswordInput(
             attrs={
