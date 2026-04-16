@@ -413,17 +413,41 @@ All identified bugs were resolved through systematic testing, debugging, and ite
 
 ### Local Setup
 
+To run the project locally:
+
+
 git clone https://github.com/chazeldred55-code/thedjangoblog.git
+
 cd thedjangoblog
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 
-## 13. Deployment
+
+---
 
 ### Heroku Deployment
 
-(keep your existing steps here)
+The application was deployed using Heroku with the following steps:
+
+1. Create a new Heroku app  
+2. Connect the GitHub repository to Heroku  
+3. Add required Config Vars:
+   - SECRET_KEY
+   - DATABASE_URL
+   - CLOUDINARY_URL
+   - DEBUG=False  
+4. Add the Heroku Postgres add-on  
+5. Deploy the main branch  
+6. Run migrations:
+
+heroku run python manage.py migrate
+
+7. Collect static files:
+
+heroku run python manage.py collectstatic
+
+8. Open the deployed application  
 
 ---
 
@@ -435,40 +459,50 @@ For production deployment, the application uses PostgreSQL, provisioned via Hero
 
 PostgreSQL is used in production because it is more robust, scalable, and suitable for handling concurrent users compared to SQLite.
 
-Django is configured to switch between SQLite and PostgreSQL using the `dj-database-url` package. This allows the application to automatically parse the `DATABASE_URL` environment variable provided by Heroku.
+The application is configured to switch between SQLite and PostgreSQL dynamically using the DATABASE_URL environment variable and the dj-database-url package.
 
-Example configuration in `settings.py`:
+In settings.py, this is handled with conditional logic:
 
 ```python
-import dj_database_url
+DATABASE_URL = config("DATABASE_URL", default="")
 
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-}
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=True,
+        )
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
-## 14. Security & Defensive Programming
+This ensures:
 
-The application follows several defensive programming and security practices:
+SQLite is used locally
+PostgreSQL is used automatically in production
+Environment Variables
 
-- **Django form validation** is used to validate all user inputs.
-- **CSRF protection** is enabled for all POST requests.
-- **Required fields** prevent empty or invalid submissions.
-- **Error handling** ensures the application fails gracefully without crashing.
-- **User feedback messages** inform users when actions succeed or fail.
-- **Delete confirmation prompts** prevent accidental data loss.
-- **Environment variables** are used to store sensitive data such as:
-  - SECRET_KEY
-  - DEBUG setting
-  - Database configuration (production)
+Sensitive data is stored securely using environment variables.
 
-Future security improvements:
-- User authentication and author-based permissions
-- Restrict edit/delete actions to content owners
-- Admin moderation controls
+A .env file is used locally and is excluded from version control via .gitignore.
 
----
+Example .env structure:
 
-## 15. Future Improvements
+SECRET_KEY=your_secret_key
+DEBUG=True
+DATABASE_URL=your_database_url
+CLOUDINARY_URL=your_cloudinary_url
+SENDGRID_API_KEY=your_sendgrid_key
+
+In production, these values are stored as Heroku Config Vars and are not exposed in the repository.
+
+## 14. Future Improvements
 
 Planned enhancements to extend functionality and improve user experience:
 
