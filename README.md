@@ -1,4 +1,4 @@
-# The Django Blog – Discussion Forum Application
+# The Django Blog – Blog with Comment System
 
 A Django web application where posts are managed via the admin interface and users interact through an authenticated comment system.
 
@@ -38,7 +38,7 @@ https://github.com/chazeldred55-code/thedjangoblog
 
 ## 1. Project Overview
 
-The Django Blog is a Reddit-style discussion platform where users can:
+The Django Blog is a blog platform with discussion-style comment interaction...
 
 - View all blog posts  
 - Read post details  
@@ -117,7 +117,7 @@ The design focused on:
 - View all posts  
 - View post details    
 - Add comments  
-- Edit comments/posts  
+- Edit their own comments  
 - Delete comments with confirmation  
 - Success and error messages  
 - Database-driven content  
@@ -131,11 +131,13 @@ The design focused on:
 
 ## 7. CRUD Functionality
 
+
 | Operation | Description |
 |---|---|
-| Create | Users can add posts and comments |
-|edit     | Users can edit and deleted comments |
-| Read | Users can view posts and details |
+| Create | Authenticated users can submit comments |
+| Read | Users can view posts and comments |
+| Update | Users can edit their own comments |
+| Delete | Users can delete their own comments |
 
 All changes update the database immediately and reflect in the UI.
 
