@@ -217,9 +217,10 @@ Post → Comment (One-to-Many)
 Post → Vote (One-to-Many)
 Comment → Comment (threaded replies)
 
----
+The Vote model has been implemented at the database level but is not yet exposed through views or the user interface. It is reserved for future feature development.
 
-### 9. Screenshots
+
+## 9. Screenshots
 
 ### View Posts – Homepage
 ![Homepage](https://github.com/user-attachments/assets/d5fc3ec6-9b6d-4fe9-9957-f5389af48aaf)
@@ -305,11 +306,10 @@ The layout adapts across screen sizes to maintain usability and readability.
 | Feature | Expected Result | Outcome |
 |---|---|---|
 | Load homepage | Posts displayed | Pass |
-| Create post | Post saved | Pass |
 | Submit empty form | Validation error | Pass |
-| Edit content | Changes saved | Pass |
-| Delete content | Removed after confirmation | Pass |
+| Delete comment | Removed after confirmation | Pass |
 | Add comment | Appears on post | Pass |
+| edit comment | edited after confirmation | pass |
 | Responsive layout | Adapts to screen | Pass |
 
 ### Lighthouse Tested
@@ -421,7 +421,9 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 ```
-
+Note: The blog app migration history runs 0001, 0002, 0004, 0005.  
+Migration 0003 was removed during development when schema changes were consolidated.  
+The current migration chain is complete and functional.
 ---
 
 ### Heroku Deployment
