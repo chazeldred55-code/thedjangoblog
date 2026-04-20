@@ -525,17 +525,9 @@ SENDGRID_API_KEY=your_sendgrid_key
 ### Credential Management
 
 During development, environment variables were accidentally committed to version control.  
-These credentials were immediately revoked and replaced.  
-
-All sensitive data is now managed securely via environment variables and excluded from version control using `.gitignore`.
-
-### Credential Management
-
-During development, environment variables were accidentally committed to version control.  
 These credentials were immediately revoked and replaced.
 
 All sensitive data is now securely managed via environment variables and excluded from version control using `.gitignore`.
-
 ## 16. Future Improvements
 
 - User authentication enhancements  
