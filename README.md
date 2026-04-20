@@ -42,10 +42,16 @@ The Django Blog is a Reddit-style discussion platform where users can:
 - View all blog posts  
 - Read post details  
 - Add comments  
-- Edit and delete content  
+- Edit and delete comments  
 - Receive feedback messages after actions  
 
 The application uses Django’s Model-Template-View architecture and a relational database to store dynamic content.
+## System Behaviour
+
+- Posts are managed via the Django admin interface
+- Users interact with the system through authenticated comments
+- Ownership checks ensure users can only modify their own data
+- All write operations are validated and protected by authentication
 
 
 ## 2 Wireframe
@@ -94,9 +100,7 @@ The design focused on:
 ### Core Functionality
 - As a user, I want to view all posts so I can browse discussions.  
 - As a user, I want to open a post to read details and comments.  
-- As a user, I want to add a comment to participate.  
-- As a user, I want to edit my content.  
-- As a user, I want to delete content I no longer want.  
+- As a user, I want to add a comment to participate.     
 - As a user, I want confirmation messages after actions.  
 
 ### UX
@@ -109,22 +113,17 @@ The design focused on:
 
 ### Implemented
 - View all posts  
-- View post details  
-- Create posts  
+- View post details    
 - Add comments  
 - Edit comments/posts  
-- Delete content with confirmation  
+- Delete comments with confirmation  
 - Success and error messages  
 - Database-driven content  
 - Responsive layout  
 
-### Planned
-- User authentication  
-- User profiles  
-- Categories or tags  
-- Post voting  
-- Search functionality  
-- Pagination  
+- User authentication (login, register, logout via django-allauth)
+- Auth-protected comment submission
+- Users can only edit/delete their own comments
 
 ---
 
@@ -133,9 +132,8 @@ The design focused on:
 | Operation | Description |
 |---|---|
 | Create | Users can add posts and comments |
+|edit     | Users can edit and deleted comments |
 | Read | Users can view posts and details |
-| Update | Users can edit content |
-| Delete | Users can remove content with confirmation |
 
 All changes update the database immediately and reflect in the UI.
 
@@ -523,8 +521,12 @@ SENDGRID_API_KEY=your_sendgrid_key
 
 - Only logged-in users can create/edit/delete  
 - Users can only modify their own content  
+### Credential Management
 
----
+During development, environment variables were accidentally committed to version control.  
+These credentials were immediately revoked and replaced.  
+
+All sensitive data is now managed securely via environment variables and excluded from version control using `.gitignore`.
 
 ## 15. Future Improvements
 
