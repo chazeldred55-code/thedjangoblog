@@ -1,6 +1,6 @@
 # The Django Blog – Discussion Forum Application
 
-A full-stack Django web application that allows users to view posts and participate in discussions through comments.
+A Django web application where posts are managed via the admin interface and users interact through an authenticated comment system.
 
 ---
 
@@ -17,20 +17,21 @@ https://github.com/chazeldred55-code/thedjangoblog
 ## Table of Contents
 
 1. [Project Overview](#1-project-overview)
-2. [WireFrame](#2-wire-frame) 
-3. [User Experience (UX)](#3-user-experience-ux)  
-4. [User Stories](#4-user-stories)  
-5. [Features](#5-features)  
-6. [CRUD Functionality](#6-crud-functionality)  
-7. [Data Model](#7-data-model)    
-9. [Responsive Design](#9-responsive-design)  
-10. [Technologies Used](#10-technologies-used)  
-11. [Testing](#11-testing)  
-12. [Bugs & Fixes](#12-bugs--fixes)  
-13. [Deployment](#13-deployment)  
-14. [Security & Defensive Programming](#14-security--defensive-programming)  
-15. [Future Improvements](#15-future-improvements)  
-16. [Credits](#16-credits)  
+2. [System_Behaviour](#2-system-behaviour)
+3. [WireFrame](#3-wire-frame) 
+4. [User Experience (UX)](#4-user-experience-ux)  
+5. [User Stories](#5-user-stories)  
+6. [Features](#6-features)  
+7. [CRUD Functionality](#7-crud-functionality)  
+8. [Data Model](#8-data-model)    
+9. [Responsive Design](#10-responsive-design)  
+10. [Technologies Used](#11-technologies-used)  
+11. [Testing](#12-testing)  
+12. [Bugs & Fixes](#13-bugs--fixes)  
+13. [Deployment](#14-deployment)  
+14. [Security & Defensive Programming](#15-security--defensive-programming)  
+15. [Future Improvements](#16-future-improvements)  
+16. [Credits](#17-credits)  
 
 
 ---
@@ -46,15 +47,16 @@ The Django Blog is a Reddit-style discussion platform where users can:
 - Receive feedback messages after actions  
 
 The application uses Django’s Model-Template-View architecture and a relational database to store dynamic content.
-## System Behaviour
+
+## 2 System Behaviour
 
 - Posts are managed via the Django admin interface
-- Users interact with the system through authenticated comments
-- Ownership checks ensure users can only modify their own data
-- All write operations are validated and protected by authentication
+- Users interact through authenticated comment submission
+- Ownership checks ensure users can only edit/delete their own comments
+- All write operations require authentication and validation
 
 
-## 2 Wireframe
+## 3 Wireframe
 
 ## Wireframes
 
@@ -79,7 +81,7 @@ The design focused on:
 ![Mobile Wireframe](docs/wireframes/mobile.png)
 ---
 
-## 3. User Experience (UX)
+## 4. User Experience (UX)
 
 ### Design Goals
 - Simple and intuitive navigation  
@@ -95,7 +97,7 @@ The design focused on:
 
 ---
 
-## 4. User Stories
+## 5. User Stories
 
 ### Core Functionality
 - As a user, I want to view all posts so I can browse discussions.  
@@ -109,7 +111,7 @@ The design focused on:
 
 ---
 
-## 5. Features
+## 6. Features
 
 ### Implemented
 - View all posts  
@@ -127,7 +129,7 @@ The design focused on:
 
 ---
 
-## 6. CRUD Functionality
+## 7. CRUD Functionality
 
 | Operation | Description |
 |---|---|
@@ -139,7 +141,7 @@ All changes update the database immediately and reflect in the UI.
 
 ---
 
-## 7. Data Model
+## 8. Data Model
 [ERD Diagram]
 <img width="238" height="370" alt="image" src="https://github.com/user-attachments/assets/342510d5-b4e7-4294-a82d-2d95c2f81dcb" />
 The ERD above illustrates the relationships between models. Field types and constraints are detailed in the sections below.
@@ -217,7 +219,7 @@ Comment → Comment (threaded replies)
 
 ---
 
-### 8. Screenshots
+### 9. Screenshots
 
 ### View Posts – Homepage
 ![Homepage](https://github.com/user-attachments/assets/d5fc3ec6-9b6d-4fe9-9957-f5389af48aaf)
@@ -261,7 +263,7 @@ Comment → Comment (threaded replies)
 
 ---
 
-## 9. Responsive Design
+## 10. Responsive Design
 
 ### Desktop
 ![Desktop view](https://github.com/user-attachments/assets/533872d2-40bc-4336-bec2-393a36ab9903)
@@ -276,7 +278,7 @@ The layout adapts across screen sizes to maintain usability and readability.
 
 ---
 
-## 10. Technologies Used
+## 11. Technologies Used
 
 ### Backend
 - Python  
@@ -296,7 +298,7 @@ The layout adapts across screen sizes to maintain usability and readability.
 
 ---
 
-## 11. Testing
+## 12. Testing
 
 ### Manual Testing
 
@@ -386,9 +388,8 @@ All custom CSS written for this project validates successfully with no errors.
 <img width="1837" height="162" alt="image" src="https://github.com/user-attachments/assets/38b010fe-39bf-4486-bf55-9c04e7748fa1" />
 
 
-## 12. Bugs & Fixes
 
-## 12. Bugs & Fixes
+## 13. Bugs & Fixes
 
 During development, several issues were encountered and resolved. These are documented below to demonstrate the debugging and problem-solving process.
 
@@ -407,7 +408,7 @@ During development, several issues were encountered and resolved. These are docu
 
 All identified bugs were resolved through systematic testing, debugging, and iterative improvements. No critical issues remain that affect core functionality.
 
-## 13. Deployment
+## 14. Deployment
 
 ### Local Setup
 
@@ -506,7 +507,7 @@ SENDGRID_API_KEY=your_sendgrid_key
 
 ---
 
-## 14. Security & Defensive Programming
+## 15. Security & Defensive Programming
 
 - Environment variables protect sensitive data  
 - `.env` is not committed to the repository  
@@ -535,7 +536,7 @@ These credentials were immediately revoked and replaced.
 
 All sensitive data is now securely managed via environment variables and excluded from version control using `.gitignore`.
 
-## 15. Future Improvements
+## 16. Future Improvements
 
 - User authentication enhancements  
 - User profiles  
@@ -549,7 +550,7 @@ All sensitive data is now securely managed via environment variables and exclude
 
 ---
 
-## 16. Credits
+## 17. Credits
 
 - Built with **Python** and **Django**  
 - HTML5 and CSS3 frontend  
