@@ -1,6 +1,6 @@
 # The Django Blog – Discussion Forum Application
 
-A full-stack Django web application that allows users to create posts, view discussions, and manage comments. The project demonstrates full CRUD functionality, database integration, responsive design, and deployment readiness.
+A full-stack Django web application that allows users to create comments, view discussions, and manage comments. The project demonstrates full CRUD functionality, database integration, responsive design, and deployment readiness.
 
 ---
 
