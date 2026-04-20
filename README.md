@@ -528,7 +528,12 @@ These credentials were immediately revoked and replaced.
 
 All sensitive data is now managed securely via environment variables and excluded from version control using `.gitignore`.
 
-A full-stack Django web application that allows users to view posts and participate in discussions through comments.
+### Credential Management
+
+During development, environment variables were accidentally committed to version control.  
+These credentials were immediately revoked and replaced.
+
+All sensitive data is now securely managed via environment variables and excluded from version control using `.gitignore`.
 
 ## 15. Future Improvements
 
