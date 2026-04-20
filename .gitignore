@@ -26,3 +26,7 @@ db.sqlite3
 # IDE (optional but nice)
 .vscode/
 .idea/
+
+desktop.ini
+posts.json
+rebuild.txt
