@@ -546,7 +546,7 @@ The security measures in this application were designed to address three key thr
 
 - User authentication enhancements  
 - User profiles  
-- Permissions for content ownership  
+- Enhanced permission system — role-based access control for admin-level moderation. 
 - Categories/tags  
 - Search functionality  
 - Pagination  
