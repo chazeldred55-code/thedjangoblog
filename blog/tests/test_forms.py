@@ -1,5 +1,5 @@
 from django.test import TestCase
-from ..forms import CommentForm
+from blog.forms import CommentForm
 
 
 class TestCommentForm(TestCase):
