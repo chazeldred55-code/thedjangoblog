@@ -237,7 +237,7 @@ The data model was designed to reflect the structure and behaviour of a discussi
 ---
 
 ### Comment Workflow
-**cant comment without loggin in**
+**Login required to submit a comment — unauthenticated users are redirected to the login page.**
 <img width="1893" height="825" alt="image" src="https://github.com/user-attachments/assets/6a6f5f36-8b5d-48e7-9136-b4a5888a2be7" />
 
 **Add Comment**  
