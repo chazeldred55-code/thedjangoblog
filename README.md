@@ -17,8 +17,8 @@ https://github.com/chazeldred55-code/thedjangoblog
 ## Table of Contents
 
 1. [Project Overview](#1-project-overview)
-2. [System_Behaviour](#2-system-behaviour)
-3. [WireFrame](#3-wire-frame) 
+2. [System Behaviour](#2-system-behaviour)
+3. [Wireframe](#3-wire-frame) 
 4. [User Experience (UX)](#4-user-experience-ux)  
 5. [User Stories](#5-user-stories)  
 6. [Features](#6-features)  
@@ -541,6 +541,7 @@ All sensitive data is now securely managed via environment variables and exclude
 
 ### Security Rationale
 The security measures in this application were designed to address three key threats. First, unauthenticated access: without controls, any user could submit, edit, or delete comment data. This is mitigated using Django’s @login_required decorator on all write operations, ensuring only authenticated users can perform actions that modify data. Second, cross-user data tampering: an authenticated user could attempt to modify or delete another user’s comment by manipulating URLs. This is prevented through ownership checks in the comment_edit and comment_delete views, where the comment author is compared against request.user, and non-matching users are redirected. Third, credential exposure: sensitive information such as API keys and the Django secret key must not be exposed in version control. This is mitigated by using environment variables via python-decouple, with the .env file excluded through .gitignore and production credentials stored securely in Heroku config vars.
+
 
 ## 16. Future Improvements
 
