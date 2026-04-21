@@ -222,6 +222,9 @@ Comment → Comment (threaded replies)
 
 The Vote model has been implemented at the database level but is not yet exposed through views or the user interface. It is reserved for future feature development.
 
+### Data Model Rationale
+The data model was designed to reflect the structure and behaviour of a discussion platform. The Post model uses a slug field instead of a numeric ID to create human-readable, SEO-friendly URLs. The Comment model includes a self-referencing parent field, enabling threaded replies and allowing users to respond to specific comments rather than only the original post. The Vote model enforces a unique_together constraint on the combination of user and post, ensuring that each user can only vote once per post at the database level. The Profile model uses a OneToOneField linked to the User model, ensuring that each account has exactly one profile and preventing the possibility of multiple profiles per user.
+
 
 ## 9. Live Screenshots
 
@@ -536,7 +539,8 @@ All sensitive data is now securely managed via environment variables and exclude
 — Confirm .env and other files are untracked:
 <img width="882" height="166" alt="image" src="https://github.com/user-attachments/assets/bb2b51c2-a38c-4e8b-b85e-952eb199f365" />
 
-
+### Security Rationale
+The security measures in this application were designed to address three key threats. First, unauthenticated access: without controls, any user could submit, edit, or delete comment data. This is mitigated using Django’s @login_required decorator on all write operations, ensuring only authenticated users can perform actions that modify data. Second, cross-user data tampering: an authenticated user could attempt to modify or delete another user’s comment by manipulating URLs. This is prevented through ownership checks in the comment_edit and comment_delete views, where the comment author is compared against request.user, and non-matching users are redirected. Third, credential exposure: sensitive information such as API keys and the Django secret key must not be exposed in version control. This is mitigated by using environment variables via python-decouple, with the .env file excluded through .gitignore and production credentials stored securely in Heroku config vars.
 
 ## 16. Future Improvements
 
