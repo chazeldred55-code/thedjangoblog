@@ -23,15 +23,16 @@ https://github.com/chazeldred55-code/thedjangoblog
 5. [User Stories](#5-user-stories)  
 6. [Features](#6-features)  
 7. [CRUD Functionality](#7-crud-functionality)  
-8. [Data Model](#8-data-model)    
-9. [Responsive Design](#10-responsive-design)  
-10. [Technologies Used](#11-technologies-used)  
-11. [Testing](#12-testing)  
-12. [Bugs & Fixes](#13-bugs--fixes)  
-13. [Deployment](#14-deployment)  
-14. [Security & Defensive Programming](#15-security--defensive-programming)  
-15. [Future Improvements](#16-future-improvements)  
-16. [Credits](#17-credits)  
+8. [Data Model](#8-data-model)
+9. [Live_Screenshots](#9-live-screenshots)   
+10. [Responsive Design](#10-responsive-design)  
+11. [Technologies Used](#11-technologies-used)  
+12. [Testing](#12-testing)  
+13. [Bugs & Fixes](#13-bugs--fixes)  
+14. [Deployment](#14-deployment)  
+15. [Security & Defensive Programming](#15-security--defensive-programming)  
+16. [Future Improvements](#16-future-improvements)  
+17. [Credits](#17-credits)  
 
 
 ---
@@ -222,7 +223,7 @@ Comment → Comment (threaded replies)
 The Vote model has been implemented at the database level but is not yet exposed through views or the user interface. It is reserved for future feature development.
 
 
-## 9. Screenshots
+## 9. Live Screenshots
 
 ### View Posts – Homepage
 ![Homepage](https://github.com/user-attachments/assets/d5fc3ec6-9b6d-4fe9-9957-f5389af48aaf)
@@ -532,6 +533,11 @@ During development, environment variables were accidentally committed to version
 These credentials were immediately revoked and replaced.
 
 All sensitive data is now securely managed via environment variables and excluded from version control using `.gitignore`.
+— Confirm .env and other files are untracked:
+<img width="882" height="166" alt="image" src="https://github.com/user-attachments/assets/bb2b51c2-a38c-4e8b-b85e-952eb199f365" />
+
+
+
 ## 16. Future Improvements
 
 - User authentication enhancements  
@@ -544,7 +550,6 @@ All sensitive data is now securely managed via environment variables and exclude
 - Comment moderation  
 - Voting system  
 
----
 
 ## 17. Credits
 
